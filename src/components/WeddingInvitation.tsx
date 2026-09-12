@@ -76,15 +76,15 @@ function ScratchBox({ label, value, onReveal }: { label: string; value: string; 
     canvas.height = rect.height * ratio;
     ctx.scale(ratio, ratio);
     const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
-    gradient.addColorStop(0, "#a77b36");
-    gradient.addColorStop(0.45, "#ead49d");
-    gradient.addColorStop(1, "#96702d");
+    gradient.addColorStop(0, "#8b2e3f");
+    gradient.addColorStop(0.45, "#c04860");
+    gradient.addColorStop(1, "#6b1d32");
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, rect.width, rect.height);
-    ctx.fillStyle = "rgba(255,255,255,.76)";
+    ctx.fillStyle = "rgba(255,255,255,.85)";
     ctx.font = "600 10px Manrope";
     ctx.textAlign = "center";
-    ctx.fillText("SCRATCH", rect.width / 2, rect.height / 2 + 4);
+    ctx.fillText(value.toUpperCase(), rect.width / 2, rect.height / 2 + 4);
   }, []);
 
   const scratch = (clientX: number, clientY: number) => {
@@ -321,9 +321,9 @@ export function WeddingInvitation() {
             <h2>A golden day awaits</h2>
             <p className="section-intro">Gently scratch each golden panel to reveal when our forever begins.</p>
             <div className="scratch-grid">
-              <ScratchBox label="Day" value="07" onReveal={() => setRevealedDates((count) => count + 1)} />
-              <ScratchBox label="Month" value="OCT" onReveal={() => setRevealedDates((count) => count + 1)} />
-              <ScratchBox label="Year" value="2026" onReveal={() => setRevealedDates((count) => count + 1)} />
+              <ScratchBox label="Day" value="21" onReveal={() => setRevealedDates((count) => count + 1)} />
+              <ScratchBox label="Month" value="JUN" onReveal={() => setRevealedDates((count) => count + 1)} />
+              <ScratchBox label="Year" value="2027" onReveal={() => setRevealedDates((count) => count + 1)} />
             </div>
             {revealedDates === 3 && (
               <div className="date-celebration" role="status">
