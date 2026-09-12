@@ -318,8 +318,8 @@ export function WeddingInvitation() {
             {/* <img className="torn-edge torn-edge-top" src={topTornEdge} alt="" aria-hidden="true" />
             <img className="torn-edge torn-edge-bottom" src={bottomTornEdge} alt="" aria-hidden="true" /> */}
             <p className="eyebrow">Save our date</p>
-            <h2>A golden day awaits</h2>
-            <p className="section-intro">Gently scratch each golden panel to reveal when our forever begins.</p>
+            <h2>A perfect day awaits</h2>
+            <p className="section-intro">Gently scratch each crimson panel to reveal when our forever begins.</p>
             <div className="scratch-grid">
               <ScratchBox label="Day" value="21" onReveal={() => setRevealedDates((count) => count + 1)} />
               <ScratchBox label="Month" value="JUN" onReveal={() => setRevealedDates((count) => count + 1)} />
