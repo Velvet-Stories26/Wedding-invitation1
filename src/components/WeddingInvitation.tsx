@@ -30,9 +30,9 @@ import bottomTornEdge from "@/assets/bottom-torn-svg.svg";
 import letterClosedImage from "@/assets/letter.png";
 import letterOpenImage from "@/assets/letter-open.png";
 
-const weddingDate = new Date("2026-10-07T17:30:00+05:30");
+const weddingDate = new Date("2027-06-21T17:30:00+02:00");
 const gallery = [
-  { src: heroImage, alt: "Saanvi and Jai in a palace garden", ratio: "portrait" },
+  { src: heroImage, alt: "Clara and Elliot in a palace garden", ratio: "portrait" },
   { src: ringsImage, alt: "Henna, heirloom rings and jasmine", ratio: "landscape" },
   { src: walkImage, alt: "The couple walking through a sunlit colonnade", ratio: "portrait" },
   { src: laughImage, alt: "The couple laughing beneath white flowers", ratio: "landscape" },
@@ -362,7 +362,7 @@ export function WeddingInvitation() {
               </div>
 
               <strong className="card-event-date">WEDNESDAY · 14 October · 2026</strong>
-              <span className="card-event-venue">at St.John of the Cross Church, Siluvaipuram</span>
+              <span className="card-event-venue">at Château in Occitanie, France</span>
             </div>
           </section>
 
@@ -395,7 +395,7 @@ export function WeddingInvitation() {
             <div className={storyOpen ? "how-we-met is-open" : "how-we-met"} data-reveal>
               <div><p className="eyebrow">The untold chapter</p><h3>How we really met</h3></div>
               <Button variant="outline" onClick={() => setStoryOpen(!storyOpen)}>{storyOpen ? "Hide the story" : "Turn the page"}</Button>
-              {storyOpen && <p>Jai arrived twenty minutes late. Saanvi had ordered for him anyway—and somehow remembered exactly how he took his coffee. He says it was fate. She says it was excellent intuition.</p>}
+              {storyOpen && <p>Elliot arrived twenty minutes late. Clara had ordered for him anyway—and somehow remembered exactly how he took his coffee. He says it was fate. She says it was excellent intuition.</p>}
             </div>
           </section> */}
 
@@ -473,7 +473,7 @@ export function WeddingInvitation() {
 
           {/* <section id="venue" className="venue-section paper-section">
             <div className="venue-image"><img src={heroImage} alt="Palace gardens at the wedding venue" width={1024} height={1536} loading="lazy" /></div>
-            <div className="venue-copy" data-reveal><p className="eyebrow">Where we gather</p><h2>Rambagh Palace</h2><p>Bhawani Singh Road<br />Jaipur, Rajasthan 302005</p><p className="venue-note">A storied palace where old-world grace meets a garden glowing in candlelight.</p><Button asChild><a href="https://maps.google.com/?q=Rambagh+Palace+Jaipur" target="_blank" rel="noreferrer"><MapPin /> Get directions</a></Button></div>
+            <div className="venue-copy" data-reveal><p className="eyebrow">Where we gather</p><h2>Château de Bonnevanture</h2><p>Occitanie<br />France</p><p className="venue-note">A storied palace where old-world grace meets a garden glowing in candlelight.</p><Button asChild><a href="https://maps.google.com/?q=Occitanie+France" target="_blank" rel="noreferrer"><MapPin /> Get directions</a></Button></div>
           </section>
 
           <section id="notes" className="faq-section">
@@ -483,7 +483,7 @@ export function WeddingInvitation() {
                 ["What should I wear?", "Festive Indian or formal attire. Our palette is ivory, rose, sage and jewel tones—wear what makes you feel wonderful."],
                 ["May I bring a guest?", "Your invitation will note whether a guest has been included. We’re keeping our celebration intimate."],
                 ["Will transport be provided?", "Shuttles will depart selected hotels 45 minutes before each event. Final timings will be shared closer to the date."],
-                ["Can I take photos?", "We invite you to be fully present during the ceremony. Afterward, capture every happy moment and tag #SaanviAndJai."],
+                ["Can I take photos?", "We invite you to be fully present during the ceremony. Afterward, capture every happy moment and tag #ClaraAndElliot."],
               ].map(([question, answer]) => <details key={question}><summary>{question}<ChevronDown /></summary><p>{answer}</p></details>)}
             </div>
           </section> */}
