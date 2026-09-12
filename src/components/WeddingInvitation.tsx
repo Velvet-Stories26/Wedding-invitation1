@@ -22,6 +22,7 @@ import laughImage from "@/assets/memory-laugh.jpg";
 import startAnimeVideo from "@/assets/start-anime.mp4";
 import weddingAnimation from "@/assets/wedding-animation.mp4";
 import invitationBg from "@/assets/invitaion-bg.png";
+import invLetterBg from "@/assets/inv-letter.png";
 import engagementImage from "@/assets/engagement.png";
 import weddingImage from "@/assets/wedding.png";
 import receptionImage from "@/assets/invitaion1-bg.png";
@@ -333,25 +334,25 @@ export function WeddingInvitation() {
             )}
           </section>
 
-          <section className="invitation-band" data-reveal style={{ backgroundImage: `url(${invitationBg})` }}>
+          <section className="invitation-band" data-reveal style={{ backgroundImage: `url(${invLetterBg})` }}>
             <div className="formal-card">
               <p className="eyebrow">YOU ARE INVITED TO THE<br />WEDDING CEREMONY OF</p>
 
               <FloralMark />
-              <h2 className="script-title card-person-name">Subin</h2>
+              <h2 className="script-title card-person-name">Clara</h2>
 
               <div className="parent-section">
-                <span className="parent-label">SON OF</span>
-                <strong className="parent-names">MR. SOOSADIMAI &amp; MRS. VEERGIN MARY</strong>
+                <span className="parent-label">DAUGHTER OF</span>
+                <strong className="parent-names">MR. & MRS. FAMILY NAME</strong>
               </div>
 
               <p className="with-connector">With</p>
 
-              <h2 className="script-title card-person-name">Siluvaidhasi</h2>
+              <h2 className="script-title card-person-name">Elliot</h2>
 
               <div className="parent-section">
-                <span className="parent-label">DAUGHTER OF</span>
-                <strong className="parent-names">MR. SILVESTER &amp; MRS. AROGIAMARY</strong>
+                <span className="parent-label">SON OF</span>
+                <strong className="parent-names">MR. & MRS. FAMILY NAME</strong>
               </div>
 
               <div className="card-custom-message">
@@ -361,7 +362,7 @@ export function WeddingInvitation() {
                 </p>
               </div>
 
-              <strong className="card-event-date">WEDNESDAY · 14 October · 2026</strong>
+              <strong className="card-event-date">MONDAY · 21 June · 2027</strong>
               <span className="card-event-venue">at Château in Occitanie, France</span>
             </div>
           </section>
