@@ -33,7 +33,7 @@ import letterOpenImage from "@/assets/letter-open.png";
 
 const weddingDate = new Date("2027-06-21T17:30:00+02:00");
 const gallery = [
-  { src: heroImage, alt: "Clara and Elliot in a palace garden", ratio: "portrait" },
+  { src: heroImage, alt: "Sujin and Jeneesha in a palace garden", ratio: "portrait" },
   { src: ringsImage, alt: "Henna, heirloom rings and jasmine", ratio: "landscape" },
   { src: walkImage, alt: "The couple walking through a sunlit colonnade", ratio: "portrait" },
   { src: laughImage, alt: "The couple laughing beneath white flowers", ratio: "landscape" },
@@ -76,13 +76,13 @@ function ScratchBox({ label, value, onReveal }: { label: string; value: string; 
     canvas.height = rect.height * ratio;
     ctx.scale(ratio, ratio);
     const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
-    gradient.addColorStop(0, "#8b2e3f");
-    gradient.addColorStop(0.45, "#c04860");
-    gradient.addColorStop(1, "#6b1d32");
+    gradient.addColorStop(0, "#3d8659");
+    gradient.addColorStop(0.45, "#5fa976");
+    gradient.addColorStop(1, "#2d6447");
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, rect.width, rect.height);
-    ctx.fillStyle = "rgba(255,255,255,.85)";
-    ctx.font = "600 10px Manrope";
+    ctx.fillStyle = "rgba(255,255,255,.90)";
+    ctx.font = "600 12px Manrope";
     ctx.textAlign = "center";
     ctx.fillText(value.toUpperCase(), rect.width / 2, rect.height / 2 + 4);
   }, []);
@@ -281,11 +281,14 @@ export function WeddingInvitation() {
       {!contentRevealed && (
         <section id="invitation" className={opened ? "opening-screen is-open" : "opening-screen"}>
           <div className="opening-glow" />
-          <div className="image-envelope-wrap">
+          <button 
+            className="image-envelope-wrap"
+            onClick={handleOpen}
+            aria-label="Open the wedding invitation"
+          >
             <video ref={videoRef} src={startAnimeVideo} muted playsInline className="envelope-img" onEnded={() => setContentRevealed(true)} />
-            {!opened && <button className="image-wax-seal" onClick={handleOpen} aria-label="Open the wedding invitation" />}
-          </div>
-          <p className="opening-hint">Tap the seal to open</p>
+          </button>
+          <p className="opening-hint">Click to open</p>
         </section>
       )}
 
@@ -297,9 +300,9 @@ export function WeddingInvitation() {
             <div className="hero-copy" data-reveal>
               <p className="hero-subheading">WE ARE <br></br>GETTING MARRIED</p>
               <h1 className="hero-names">
-                <span className="script-title">Subin</span>
+                <span className="script-title">Sujin</span>
                 <span className="hero-amp">&amp;</span>
-                <span className="script-title">Siluvaidhasi</span>
+                <span className="script-title">Jeneesha</span>
               </h1>
               <div className="hero-gold-divider">
                 <span className="divider-line" />
@@ -339,19 +342,19 @@ export function WeddingInvitation() {
               <p className="eyebrow">YOU ARE INVITED TO THE<br />WEDDING CEREMONY OF</p>
 
               <FloralMark />
-              <h2 className="script-title card-person-name">Clara</h2>
+              <h2 className="script-title card-person-name">Sujin James</h2>
 
               <div className="parent-section">
-                <span className="parent-label">DAUGHTER OF</span>
-                <strong className="parent-names">MR. & MRS. FAMILY NAME</strong>
+                <span className="parent-label">SON OF</span>
+                <strong className="parent-names">MR. & MRS. JAMES</strong>
               </div>
 
               <p className="with-connector">With</p>
 
-              <h2 className="script-title card-person-name">Elliot</h2>
+              <h2 className="script-title card-person-name">Jeneesha James</h2>
 
               <div className="parent-section">
-                <span className="parent-label">SON OF</span>
+                <span className="parent-label">DAUGHTER OF</span>
                 <strong className="parent-names">MR. & MRS. FAMILY NAME</strong>
               </div>
 

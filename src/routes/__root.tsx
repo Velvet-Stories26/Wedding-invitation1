@@ -77,14 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Clara & Elliot Wedding Invitation" },
+      { title: "Sujin & Jeneesha James Wedding Invitation" },
       { name: "description", content: "Join us as we celebrate the beginning of forever. A premium wedding invitation experience." },
-      { name: "author", content: "Clara & Elliot" },
+      { name: "author", content: "Sujin & Jeneesha James" },
       { property: "og:type", content: "website" },
-      { property: "og:title", content: "Forever Begins - Clara & Elliot Wedding" },
+      { property: "og:title", content: "Forever Begins - Sujin & Jeneesha James Wedding" },
       { property: "og:description", content: "Join us as we celebrate the beginning of forever." },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "theme-color", content: "#1a1a1a" },
+      { name: "theme-color", content: "#3d8659" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
