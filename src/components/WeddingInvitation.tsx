@@ -66,6 +66,7 @@ function ScratchBox({ label, value, onReveal }: { label: string; value: string; 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const hasRevealed = useRef(false);
   const [revealed, setRevealed] = useState(false);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -76,17 +77,26 @@ function ScratchBox({ label, value, onReveal }: { label: string; value: string; 
     canvas.width = rect.width * ratio;
     canvas.height = rect.height * ratio;
     ctx.scale(ratio, ratio);
+
+    // Dark Olive Green gradient cover (BEFORE scratching)
     const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
-    gradient.addColorStop(0, "#3d8659");
-    gradient.addColorStop(0.45, "#5fa976");
-    gradient.addColorStop(1, "#2d6447");
+    gradient.addColorStop(0, "#2c4c36");
+    gradient.addColorStop(0.5, "#1e3824");
+    gradient.addColorStop(1, "#152c1b");
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, rect.width, rect.height);
-    ctx.fillStyle = "rgba(255,255,255,.90)";
-    ctx.font = "600 12px Manrope";
+
+    // Show TITLE (Date / Month / Year) on cover BEFORE scratching
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "600 14px 'Cormorant Garamond', 'Italiana', serif";
     ctx.textAlign = "center";
-    ctx.fillText(value.toUpperCase(), rect.width / 2, rect.height / 2 + 4);
-  }, []);
+    ctx.textBaseline = "middle";
+    ctx.fillText(label.toUpperCase(), rect.width / 2, rect.height / 2 - 5);
+
+    ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
+    ctx.font = "500 9px 'Cormorant Garamond', sans-serif";
+    ctx.fillText("✦ SCRATCH ✦", rect.width / 2, rect.height / 2 + 13);
+  }, [label]);
 
   const scratch = (clientX: number, clientY: number) => {
     const canvas = canvasRef.current;
@@ -99,7 +109,7 @@ function ScratchBox({ label, value, onReveal }: { label: string; value: string; 
     ctx.scale(ratio, ratio);
     ctx.globalCompositeOperation = "destination-out";
     ctx.beginPath();
-    ctx.arc(clientX - rect.left, clientY - rect.top, 21, 0, Math.PI * 2);
+    ctx.arc(clientX - rect.left, clientY - rect.top, 22, 0, Math.PI * 2);
     ctx.fill();
     ctx.restore();
     const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
@@ -114,8 +124,8 @@ function ScratchBox({ label, value, onReveal }: { label: string; value: string; 
 
   return (
     <div className="scratch-item">
-      <span>{label}</span>
-      <strong>{value}</strong>
+      {/* Revealed value only shown underneath after scratching */}
+      <strong className="revealed-value">{value}</strong>
       {!revealed && (
         <canvas
           ref={canvasRef}
@@ -169,37 +179,60 @@ export function WeddingInvitation() {
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!contentRevealed) return;
+
+    const revealElements = document.querySelectorAll<HTMLElement>("[data-reveal]");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const target = entry.target as HTMLElement;
+            if (!target.classList.contains("hero-copy")) {
+              target.dataset["visible"] = "true";
+              observer.unobserve(target);
+            }
+          }
+        });
+      },
+      { threshold: 0.05, rootMargin: "0px 0px 100px 0px" }
+    );
+
+    revealElements.forEach((el) => {
+      if (!el.classList.contains("hero-copy")) {
+        observer.observe(el);
+      }
+    });
+
     const onScroll = () => {
       const total = document.documentElement.scrollHeight - window.innerHeight;
       setProgress(total > 0 ? (window.scrollY / total) * 100 : 0);
-      document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((element) => {
+      revealElements.forEach((element) => {
         if (element.classList.contains("hero-copy")) return;
-        if (element.getBoundingClientRect().top < window.innerHeight * 0.88) element.dataset["visible"] = "true";
+        if (element.getBoundingClientRect().top < window.innerHeight * 0.92) {
+          element.dataset["visible"] = "true";
+        }
       });
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
-  useEffect(() => {
-    if (contentRevealed) {
-      document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((element) => {
-        if (!element.classList.contains("hero-copy") && element.getBoundingClientRect().top < window.innerHeight * 0.95) {
-          element.dataset["visible"] = "true";
-        }
-      });
+    // 5-second delay after 2nd video begins before smoothly displaying hero names
+    const heroTimer = setTimeout(() => {
+      const heroCopy = document.querySelector<HTMLElement>(".hero-copy");
+      if (heroCopy) {
+        heroCopy.dataset["visible"] = "true";
+      }
+    }, 5000);
 
-      // Wait 5 seconds after 2nd video starts before smoothly displaying the names
-      const heroTimer = setTimeout(() => {
-        const heroCopy = document.querySelector<HTMLElement>(".hero-copy");
-        if (heroCopy) {
-          heroCopy.dataset["visible"] = "true";
-        }
-      }, 5000);
-
-      return () => clearTimeout(heroTimer);
-    }
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      clearTimeout(heroTimer);
+    };
   }, [contentRevealed]);
 
   useEffect(() => {
@@ -353,9 +386,9 @@ export function WeddingInvitation() {
             <img className="torn-edge torn-edge-bottom" src={bottomTornEdge} alt="" aria-hidden="true" /> */}
             <p className="eyebrow">Save our date</p>
             <h2>A perfect day awaits</h2>
-            <p className="section-intro">Gently scratch each crimson panel to reveal when our forever begins.</p>
+            <p className="section-intro">Gently scratch each olive panel to reveal when our forever begins.</p>
             <div className="scratch-grid">
-              <ScratchBox label="Day" value="21" onReveal={() => setRevealedDates((count) => count + 1)} />
+              <ScratchBox label="Date" value="21" onReveal={() => setRevealedDates((count) => count + 1)} />
               <ScratchBox label="Month" value="JUN" onReveal={() => setRevealedDates((count) => count + 1)} />
               <ScratchBox label="Year" value="2027" onReveal={() => setRevealedDates((count) => count + 1)} />
             </div>

@@ -652,11 +652,10 @@ a {
   padding: 6rem 1.4rem
 }
 
+.date-reveal-section,
 .paper-section {
   text-align: center;
-  background-color: var(--paper);
-  background-image: radial-gradient(color-mix(in oklab, var(--primary) 11%, transparent) .7px, transparent .7px);
-  background-size: 8px 8px
+  background: radial-gradient(ellipse at center, #f8faf5 0%, #ebf3e7 55%, #e1ebd9 100%);
 }
 
 .torn-section {
@@ -708,31 +707,32 @@ a {
 .scratch-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: .6rem;
+  gap: 0.8rem;
   max-width: 32rem;
-  margin: auto
+  margin: auto;
 }
 
 .scratch-item {
   position: relative;
-  height: 7.5rem;
-  display: grid;
-  place-content: center;
-  border: 1px solid var(--border);
-  background: var(--card);
-  overflow: hidden
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #e8f1e0 0%, #d8e6cb 100%);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
-.scratch-item>span {
-  font: 500 .55rem var(--font-sans);
-  text-transform: uppercase;
-  letter-spacing: .18em;
-  color: var(--muted-foreground)
-}
-
-.scratch-item strong {
-  font: 400 1.8rem var(--font-display);
-  margin-top: .45rem
+.scratch-item .revealed-value {
+  font-family: var(--font-serif), "Italiana", "Cormorant Garamond", serif;
+  font-size: clamp(2.1rem, 6vw, 2.7rem);
+  font-weight: 600;
+  color: #1a3d24;
+  letter-spacing: 0.04em;
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
 }
 
 .scratch-item canvas {
@@ -740,8 +740,9 @@ a {
   inset: 0;
   width: 100%;
   height: 100%;
+  border-radius: 14px;
   touch-action: none;
-  cursor: crosshair
+  cursor: crosshair;
 }
 
 .invitation-band {
