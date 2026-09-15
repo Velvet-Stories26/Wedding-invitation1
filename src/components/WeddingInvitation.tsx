@@ -30,6 +30,7 @@ import topTornEdge from "@/assets/top-torn-svg.svg";
 import bottomTornEdge from "@/assets/bottom-torn-svg.svg";
 import letterClosedImage from "@/assets/letter.png";
 import letterOpenImage from "@/assets/letter-open.png";
+import musicFile from "@/assets/music.mp3";
 
 const weddingDate = new Date("2027-06-21T17:30:00+02:00");
 const gallery = [
@@ -153,9 +154,18 @@ export function WeddingInvitation() {
   const [music, setMusic] = useState(false);
   const [progress, setProgress] = useState(0);
   const [revealedDates, setRevealedDates] = useState(0);
-  const audioRef = useRef<{ context: AudioContext; oscillators: OscillatorNode[] } | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const swipeStart = useRef(0);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
 
   useEffect(() => {
     setMounted(true);
@@ -163,6 +173,7 @@ export function WeddingInvitation() {
       const total = document.documentElement.scrollHeight - window.innerHeight;
       setProgress(total > 0 ? (window.scrollY / total) * 100 : 0);
       document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((element) => {
+        if (element.classList.contains("hero-copy")) return;
         if (element.getBoundingClientRect().top < window.innerHeight * 0.88) element.dataset["visible"] = "true";
       });
     };
@@ -170,6 +181,26 @@ export function WeddingInvitation() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (contentRevealed) {
+      document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((element) => {
+        if (!element.classList.contains("hero-copy") && element.getBoundingClientRect().top < window.innerHeight * 0.95) {
+          element.dataset["visible"] = "true";
+        }
+      });
+
+      // Wait 5 seconds after 2nd video starts before smoothly displaying the names
+      const heroTimer = setTimeout(() => {
+        const heroCopy = document.querySelector<HTMLElement>(".hero-copy");
+        if (heroCopy) {
+          heroCopy.dataset["visible"] = "true";
+        }
+      }, 5000);
+
+      return () => clearTimeout(heroTimer);
+    }
+  }, [contentRevealed]);
 
   useEffect(() => {
     if (revealedDates === 3) {
@@ -207,33 +238,33 @@ export function WeddingInvitation() {
   }, []);
 
   const toggleMusic = () => {
-    if (music && audioRef.current) {
-      void audioRef.current.context.close();
-      audioRef.current = null;
-      setMusic(false);
-      return;
+    if (!audioRef.current) {
+      audioRef.current = new Audio(musicFile);
+      audioRef.current.loop = true;
     }
-    const AudioContextClass = window.AudioContext;
-    const context = new AudioContextClass();
-    const gain = context.createGain();
-    gain.gain.value = 0.018;
-    gain.connect(context.destination);
-    const oscillators = [261.63, 329.63, 392].map((frequency, index) => {
-      const oscillator = context.createOscillator();
-      const toneGain = context.createGain();
-      oscillator.type = "sine";
-      oscillator.frequency.value = frequency / (index === 0 ? 2 : 1);
-      toneGain.gain.value = 0.22;
-      oscillator.connect(toneGain).connect(gain);
-      oscillator.start();
-      return oscillator;
-    });
-    audioRef.current = { context, oscillators };
-    setMusic(true);
+
+    if (music) {
+      audioRef.current.pause();
+      setMusic(false);
+    } else {
+      audioRef.current.play().then(() => {
+        setMusic(true);
+      }).catch((err) => {
+        console.log("Audio playback error:", err);
+      });
+    }
   };
 
   const handleOpen = () => {
     setOpened(true);
+    if (!audioRef.current) {
+      audioRef.current = new Audio(musicFile);
+      audioRef.current.loop = true;
+    }
+    audioRef.current.play().then(() => {
+      setMusic(true);
+    }).catch(() => {});
+
     if (videoRef.current) {
       videoRef.current.play().catch(() => {
         console.log("Video playback failed");

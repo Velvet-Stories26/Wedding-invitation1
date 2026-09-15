@@ -484,7 +484,7 @@ a {
 .hero-shade {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.12) 0%, rgba(230, 245, 235, 0.25) 60%, rgba(20, 50, 35, 0.45) 100%);
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.12) 100%);
   z-index: 1;
 }
 
@@ -495,22 +495,39 @@ a {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  color: #1a4d2e;
+  color: #0e3d21;
   width: 90%;
-  max-width: 540px;
+  max-width: 560px;
   padding: 2rem 1rem;
   margin: auto;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  will-change: opacity, transform;
+}
+
+.hero-copy[data-reveal] {
+  opacity: 0;
+  transform: translateY(35px) scale(0.97);
+  transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-copy[data-reveal][data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .hero-subheading {
   font-family: var(--font-serif);
-  font-size: clamp(0.65rem, 2.5vw, 0.85rem);
-  font-weight: 600;
+  font-size: clamp(0.7rem, 2.8vw, 0.9rem);
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.38em;
-  color: #2d6447;
-  margin-bottom: 3rem;
-  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.4em;
+  color: #0d381e;
+  margin-bottom: 2rem;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95), 0 0 15px rgba(255, 255, 255, 0.9);
 }
 
 .hero-names {
@@ -523,21 +540,27 @@ a {
 
 .script-title {
   font-family: "Great Vibes", "Alex Brush", cursive;
-  font-size: clamp(4.2rem, 16vw, 7.5rem);
-  font-weight: 400;
-  color: #3d8659;
-  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.7), 0 0 15px rgba(61, 134, 89, 0.3);
+  font-size: clamp(4.4rem, 17vw, 8rem);
+  font-weight: 500;
+  color: #0e3d21;
+  text-shadow: 
+    0 0 8px rgba(255, 255, 255, 1),
+    0 0 16px rgba(255, 255, 255, 0.9),
+    0 2px 6px rgba(255, 255, 255, 1),
+    0 3px 12px rgba(0, 0, 0, 0.25);
   transform: rotate(-2deg);
   margin: -0.15em 0;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
 }
 
 .hero-amp {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: clamp(1.3rem, 4.5vw, 2.2rem);
-  color: #3d8659;
-  margin: 2rem ;
-  font-weight: 400;
+  font-size: clamp(1.4rem, 5vw, 2.4rem);
+  color: #0e3d21;
+  margin: 1.5rem 0;
+  font-weight: 500;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95), 0 0 12px rgba(255, 255, 255, 0.9);
 }
 
 .hero-gold-divider {
@@ -547,20 +570,20 @@ a {
   gap: 0.8rem;
   width: 100%;
   max-width: 260px;
-  margin: 3rem auto 1.4rem;
-  color: #3d8659;
+  margin: 2.2rem auto 1.4rem;
+  color: #0e3d21;
 }
 
 .divider-line {
   flex: 1;
   height: 1px;
-  background: linear-gradient(to right, transparent, #3d8659 50%, transparent);
+  background: linear-gradient(to right, transparent, #0e3d21 50%, transparent);
 }
 
 .divider-diamond {
   font-size: 0.75rem;
   transform: scale(1.2);
-  color: #3d8659;
+  color: #0e3d21;
   display: inline-block;
   line-height: 1;
 }
@@ -571,9 +594,9 @@ a {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.35em;
-  color: #2d6447;
+  color: #0d381e;
   margin-bottom: 0.7rem;
-  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.6);
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
 }
 
 .hero-date-text {
@@ -581,7 +604,7 @@ a {
   font-size: clamp(0.75rem, 3vw, 1rem);
   font-weight: 500;
   letter-spacing: 0.25em;
-  color: #1a4d2e;
+  color: #0d381e;
   margin-bottom: 1.8rem;
 }
 
@@ -591,12 +614,13 @@ a {
   align-items: center;
   gap: 0.6rem;
   margin-top: 0.5rem;
-  color: #2d6447;
+  color: #0d381e;
   font-family: var(--font-sans);
   font-size: 0.6rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
   font-weight: 600;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
 }
 
 .scroll-line {
