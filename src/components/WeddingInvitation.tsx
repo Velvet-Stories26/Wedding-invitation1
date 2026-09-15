@@ -78,24 +78,33 @@ function ScratchBox({ label, value, onReveal }: { label: string; value: string; 
     canvas.height = rect.height * ratio;
     ctx.scale(ratio, ratio);
 
-    // Dark Olive Green gradient cover (BEFORE scratching)
+    // Dark Emerald-Olive Gradient Cover (BEFORE scratching)
     const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
-    gradient.addColorStop(0, "#2c4c36");
-    gradient.addColorStop(0.5, "#1e3824");
-    gradient.addColorStop(1, "#152c1b");
+    gradient.addColorStop(0, "#29452f");
+    gradient.addColorStop(0.5, "#1b3322");
+    gradient.addColorStop(1, "#112417");
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, rect.width, rect.height);
 
-    // Show TITLE (Date / Month / Year) on cover BEFORE scratching
-    ctx.fillStyle = "#ffffff";
-    ctx.font = "600 14px 'Cormorant Garamond', 'Italiana', serif";
+    // Subtle luxury diamond corner accents
+    ctx.fillStyle = "rgba(225, 240, 215, 0.4)";
+    ctx.font = "8px serif";
+    ctx.fillText("◇", 12, 14);
+    ctx.fillText("◇", rect.width - 12, 14);
+    ctx.fillText("◇", 12, rect.height - 12);
+    ctx.fillText("◇", rect.width - 12, rect.height - 12);
+
+    // Label Title (DAY / MONTH / YEAR) in elegant Italiana/Cormorant serif
+    ctx.fillStyle = "#f5faf0";
+    ctx.font = "500 16px 'Italiana', 'Cormorant Garamond', serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText(label.toUpperCase(), rect.width / 2, rect.height / 2 - 5);
+    ctx.fillText(label.toUpperCase(), rect.width / 2, rect.height / 2 - 7);
 
-    ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
-    ctx.font = "500 9px 'Cormorant Garamond', sans-serif";
-    ctx.fillText("✦ SCRATCH ✦", rect.width / 2, rect.height / 2 + 13);
+    // Sophisticated italic hint
+    ctx.fillStyle = "#b8cbab";
+    ctx.font = "italic 400 10.5px 'Cormorant Garamond', serif";
+    ctx.fillText("scratch to reveal", rect.width / 2, rect.height / 2 + 13);
   }, [label]);
 
   const scratch = (clientX: number, clientY: number) => {
@@ -124,8 +133,11 @@ function ScratchBox({ label, value, onReveal }: { label: string; value: string; 
 
   return (
     <div className="scratch-item">
-      {/* Revealed value only shown underneath after scratching */}
-      <strong className="revealed-value">{value}</strong>
+      {/* Revealed content: both label and date number in beautiful font */}
+      <div className="revealed-content">
+        <span className="revealed-label">{label}</span>
+        <strong className="revealed-value">{value}</strong>
+      </div>
       {!revealed && (
         <canvas
           ref={canvasRef}
@@ -183,6 +195,17 @@ export function WeddingInvitation() {
 
   useEffect(() => {
     if (!contentRevealed) return;
+
+    // Start music automatically right when 2nd video (weddingAnimation.mp4) entrance begins
+    if (!audioRef.current) {
+      audioRef.current = new Audio(musicFile);
+      audioRef.current.loop = true;
+    }
+    audioRef.current.play().then(() => {
+      setMusic(true);
+    }).catch((err) => {
+      console.log("Audio play error on 2nd video start:", err);
+    });
 
     const revealElements = document.querySelectorAll<HTMLElement>("[data-reveal]");
 
@@ -290,13 +313,11 @@ export function WeddingInvitation() {
 
   const handleOpen = () => {
     setOpened(true);
+    // Pre-initialize audio instance on gesture so browser permissions allow playback when 2nd video starts
     if (!audioRef.current) {
       audioRef.current = new Audio(musicFile);
       audioRef.current.loop = true;
     }
-    audioRef.current.play().then(() => {
-      setMusic(true);
-    }).catch(() => {});
 
     if (videoRef.current) {
       videoRef.current.play().catch(() => {
@@ -388,7 +409,7 @@ export function WeddingInvitation() {
             <h2>A perfect day awaits</h2>
             <p className="section-intro">Gently scratch each olive panel to reveal when our forever begins.</p>
             <div className="scratch-grid">
-              <ScratchBox label="Date" value="21" onReveal={() => setRevealedDates((count) => count + 1)} />
+              <ScratchBox label="Day" value="21" onReveal={() => setRevealedDates((count) => count + 1)} />
               <ScratchBox label="Month" value="JUN" onReveal={() => setRevealedDates((count) => count + 1)} />
               <ScratchBox label="Year" value="2027" onReveal={() => setRevealedDates((count) => count + 1)} />
             </div>
@@ -396,7 +417,7 @@ export function WeddingInvitation() {
               <div className="date-celebration" role="status">
                 <div className="celebration-sparkles" aria-hidden="true">✦ ✧ ✦</div>
                 <strong>Our forever begins</strong>
-                <span>14 October 2026</span>
+                <span className="celebration-date">21 June 2027</span>
               </div>
             )}
           </section>
