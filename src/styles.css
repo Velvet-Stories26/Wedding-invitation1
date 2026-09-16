@@ -1620,7 +1620,7 @@ a {
 /* OPEN ENVELOPE IMAGE */
 .letter-open-img {
   position: relative;
-  width: min(94vw, 460px);
+  width: min(96vw, 490px);
   margin-top: 0.5rem;
   opacity: 0;
   transform: translateY(20px) scale(0.96);
@@ -1646,8 +1646,8 @@ a {
 
 .image-letter-wrapper.is-open .letter-open-img {
   opacity: 1;
-  transform: translateY(-16px) scale(1);
-  max-height: 1000px;
+  transform: translateY(-16px) scale(1.06);
+  max-height: 1200px;
   transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s, max-height 0.8s ease 0.2s;
 }
 
@@ -1666,8 +1666,8 @@ a {
   width: 38px;
   height: 1px;
   flex-shrink: 0;
-  background: var(--primary);
-  opacity: 0.4;
+  background: #3b5836;
+  opacity: 0.5;
 }
 
 .caption-content {
@@ -1679,17 +1679,18 @@ a {
 
 .caption-icon {
   font-size: 0.9rem;
-  color: var(--primary);
+  color: #3b5836;
   animation: gentle-bounce 2s ease-in-out infinite;
 }
 
 .letter-caption p {
   margin: 0;
   font-family: var(--font-serif);
-  font-size: 0.85rem;
+  font-size: 0.92rem;
   font-style: italic;
-  letter-spacing: 0.02em;
-  color: color-mix(in oklab, var(--primary-foreground) 85%, transparent);
+  letter-spacing: 0.04em;
+  color: #1b3a20;
+  font-weight: 600;
 }
 
 @keyframes gentle-bounce {
