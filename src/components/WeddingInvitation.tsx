@@ -425,8 +425,8 @@ export function WeddingInvitation() {
           </section>
 
           <section className="paper-section date-reveal-section torn-section" data-reveal>
-            {/* <img className="torn-edge torn-edge-top" src={topTornEdge} alt="" aria-hidden="true" />
-            <img className="torn-edge torn-edge-bottom" src={bottomTornEdge} alt="" aria-hidden="true" /> */}
+            <img className="torn-edge torn-edge-top" src={topTornEdge} alt="" aria-hidden="true" />
+            <img className="torn-edge torn-edge-bottom" src={bottomTornEdge} alt="" aria-hidden="true" />
             <p className="eyebrow">Save our date</p>
             <h2>A perfect day awaits</h2>
             <p className="section-intro">Gently scratch each olive panel to reveal when our forever begins.</p>
@@ -605,7 +605,9 @@ export function WeddingInvitation() {
             </div>
           </section>
 
-         <section className={`letter-section ${letterOpen ? "is-open" : ""}`}>
+         <section className={`letter-section ${letterOpen ? "is-open" : ""} torn-section`}>
+          <img className="torn-edge torn-edge-top" src={topTornEdge} alt="" aria-hidden="true" />
+          <img className="torn-edge torn-edge-bottom" src={bottomTornEdge} alt="" aria-hidden="true" />
           <div className="letter-header" data-reveal>
             <p className="eyebrow">A little note for you</p>
             <h2>Words From Our Hearts</h2>

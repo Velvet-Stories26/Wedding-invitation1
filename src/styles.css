@@ -653,9 +653,15 @@ a {
 }
 
 .date-reveal-section,
-.paper-section {
+.paper-section,
+.events-section,
+.letter-section,
+.faq-section,
+.story-section,
+.venue-section {
   text-align: center;
-  background: radial-gradient(ellipse at center, #edf4e7 0%, #e1ebd9 55%, #d5e2cb 100%);
+  background: #ffffff !important;
+  box-shadow: inset 0 0 60px rgba(225, 235, 217, 0.35);
 }
 
 .torn-section {
@@ -682,26 +688,36 @@ a {
 }
 
 .paper-section h2,
+.date-reveal-section h2,
 .countdown-section h2,
 .polaroid-section h2,
+.events-section h2,
+.letter-section h2,
 .faq-section h2 {
   font: 400 clamp(2.45rem, 10vw, 4.5rem)/1 var(--font-display);
-  margin: 0
+  color: #1b3a20;
+  margin: 0;
+  text-shadow: none;
 }
 
 .paper-section>.eyebrow,
 .paper-section>div>.eyebrow,
+.date-reveal-section .eyebrow,
 .countdown-section>.eyebrow,
 .polaroid-section>div>.eyebrow,
+.events-section .eyebrow,
+.letter-section .eyebrow,
 .faq-section>div>.eyebrow {
-  color: var(--primary)
+  color: #3b5836;
+  letter-spacing: 0.2em;
+  font-weight: 600;
 }
 
 .section-intro {
   max-width: 31rem;
   margin: 1.2rem auto 2.5rem;
   font: italic 1.1rem/1.6 var(--font-serif);
-  color: var(--ink-soft)
+  color: #2b4226;
 }
 
 .scratch-grid {
@@ -1453,16 +1469,11 @@ a {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background:
-    radial-gradient(
-      circle at 50% 35%,
-      rgba(255, 255, 255, 0.55),
-      transparent 42%
-    ),
-    var(--secondary);
-  color: var(--primary-foreground);
+  background: #ffffff !important;
+  box-shadow: inset 0 0 60px rgba(225, 235, 217, 0.35);
+  color: #1b3a20;
   overflow: hidden;
-  margin-bottom: -5rem;
+  margin-bottom: 0;
 }
 
 .letter-header {
