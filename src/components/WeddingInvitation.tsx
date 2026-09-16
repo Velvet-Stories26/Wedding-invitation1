@@ -683,25 +683,24 @@ export function WeddingInvitation() {
           {/* End button to trigger brother's wedding popup */}
           <div className="end-popup-trigger-wrapper">
             <button className="end-popup-trigger" onClick={() => setShowEndPopup(true)}>
-              <Sparkles size={15} />
-              <span>Don't forget to click here for my brother's invitation</span>
+              <Sparkles size={14} />
+              <span>Brother's Wedding Invitation</span>
             </button>
           </div>
 
           {/* ── End-of-page Popup ── */}
         
           {showEndPopup && (
-            <div className="end-popup-backdrop" role="dialog" aria-modal="true" aria-label="Another invitation" onClick={(e) => { if (e.target === e.currentTarget) setShowEndPopup(false); }}>
+            <div className="end-popup-backdrop" role="dialog" aria-modal="true" aria-label="Brother's Wedding Invitation" onClick={(e) => { if (e.target === e.currentTarget) setShowEndPopup(false); }}>
               <div className="end-popup">
                 <button className="end-popup-close" onClick={() => setShowEndPopup(false)} aria-label="Close">
                   <X size={18} />
                 </button>
                 <div className="end-popup-icon" aria-hidden="true">✦</div>
-                <p className="end-popup-eyebrow">While you're here</p>
-                <h2 className="end-popup-title">Another Love Story Awaits</h2>
+                <p className="end-popup-eyebrow">A Special Celebration</p>
+                <h2 className="end-popup-title">My Brother's Invitation</h2>
                 <p className="end-popup-body">
-                  My brother is also getting married soon — close in date to ours.
-                  His wedding invitation is just as heartfelt, and we'd love for you to witness that celebration too.
+                  We warmly invite you to explore and celebrate my brother's upcoming wedding celebration as well.
                 </p>
                 <a
                   href="https://velvet-stories26.github.io/radiant-vows-invites/"
@@ -710,9 +709,9 @@ export function WeddingInvitation() {
                   className="end-popup-btn"
                   onClick={() => setShowEndPopup(false)}
                 >
-                  <Heart size={14} /> View His Invitation
+                  <Heart size={14} /> View Invitation
                 </a>
-                <button className="end-popup-skip" onClick={() => setShowEndPopup(false)}>Maybe later</button>
+                <button className="end-popup-skip" onClick={() => setShowEndPopup(false)}>Close</button>
               </div>
             </div>
           )}
