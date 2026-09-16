@@ -258,8 +258,8 @@ export function WeddingInvitation() {
           element.dataset["visible"] = "true";
         }
       });
-      // Show end popup once when user reaches bottom
-      if (!hasShownPopup.current && total > 0 && window.scrollY >= total - 40) {
+      // Show end popup once when user reaches near the bottom
+      if (!hasShownPopup.current && total > 0 && window.scrollY >= total - 120) {
         hasShownPopup.current = true;
         setTimeout(() => setShowEndPopup(true), 600);
       }
@@ -280,6 +280,18 @@ export function WeddingInvitation() {
       window.removeEventListener("scroll", onScroll);
       clearTimeout(heroTimer);
     };
+  }, [contentRevealed]);
+
+  // Fallback: show popup 30s after invitation opens (in case user doesn't scroll far enough)
+  useEffect(() => {
+    if (!contentRevealed) return;
+    const popupFallback = setTimeout(() => {
+      if (!hasShownPopup.current) {
+        hasShownPopup.current = true;
+        setShowEndPopup(true);
+      }
+    }, 30000);
+    return () => clearTimeout(popupFallback);
   }, [contentRevealed]);
 
   useEffect(() => {
