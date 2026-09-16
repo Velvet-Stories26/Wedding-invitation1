@@ -32,7 +32,7 @@ import letterClosedImage from "@/assets/letter.png";
 import letterOpenImage from "@/assets/letter-open.png";
 import musicFile from "@/assets/music.mp3";
 
-const weddingDate = new Date("2027-06-21T17:30:00+02:00");
+const weddingDate = new Date("2026-10-07T11:00:00+05:30");
 const gallery = [
   { src: heroImage, alt: "Sujin and Jeneesha in a palace garden", ratio: "portrait" },
   { src: ringsImage, alt: "Henna, heirloom rings and jasmine", ratio: "landscape" },
@@ -65,46 +65,45 @@ function useCountdown() {
 function ScratchBox({ label, value, onReveal }: { label: string; value: string; onReveal: () => void }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const hasRevealed = useRef(false);
-  const [revealed, setRevealed] = useState(false);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    const ratio = window.devicePixelRatio || 1;
-    const rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width * ratio;
-    canvas.height = rect.height * ratio;
-    ctx.scale(ratio, ratio);
+    const initCanvas = () => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+      const ratio = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
 
-    // Dark Emerald-Olive Gradient Cover (BEFORE scratching)
-    const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
-    gradient.addColorStop(0, "#29452f");
-    gradient.addColorStop(0.5, "#1b3322");
-    gradient.addColorStop(1, "#112417");
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, rect.width, rect.height);
+      canvas.width = Math.floor(rect.width * ratio);
+      canvas.height = Math.floor(rect.height * ratio);
+      ctx.scale(ratio, ratio);
 
-    // Subtle luxury diamond corner accents
-    ctx.fillStyle = "rgba(225, 240, 215, 0.4)";
-    ctx.font = "8px serif";
-    ctx.fillText("◇", 12, 14);
-    ctx.fillText("◇", rect.width - 12, 14);
-    ctx.fillText("◇", 12, rect.height - 12);
-    ctx.fillText("◇", rect.width - 12, rect.height - 12);
+      // Solid 100% Opaque Dark Emerald-Olive Cover (BEFORE scratching - 0% leak)
+      const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
+      gradient.addColorStop(0, "#233d28");
+      gradient.addColorStop(0.5, "#162a1b");
+      gradient.addColorStop(1, "#0d1d12");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, rect.width + 10, rect.height + 10);
 
-    // Label Title (DAY / MONTH / YEAR) in elegant Italiana/Cormorant serif
-    ctx.fillStyle = "#f5faf0";
-    ctx.font = "500 16px 'Italiana', 'Cormorant Garamond', serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText(label.toUpperCase(), rect.width / 2, rect.height / 2 - 7);
+      // Cover title in elegant Italiana / Cormorant serif font
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "600 15px 'Italiana', 'Cormorant Garamond', serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(label.toUpperCase(), rect.width / 2, rect.height / 2 - 7);
 
-    // Sophisticated italic hint
-    ctx.fillStyle = "#b8cbab";
-    ctx.font = "italic 400 10.5px 'Cormorant Garamond', serif";
-    ctx.fillText("scratch to reveal", rect.width / 2, rect.height / 2 + 13);
+      // Subtle italic hint
+      ctx.fillStyle = "#b5c9a7";
+      ctx.font = "italic 400 10.5px 'Cormorant Garamond', serif";
+      ctx.fillText("scratch to reveal", rect.width / 2, rect.height / 2 + 13);
+    };
+
+    initCanvas();
+    window.addEventListener("resize", initCanvas);
+    return () => window.removeEventListener("resize", initCanvas);
   }, [label]);
 
   const scratch = (clientX: number, clientY: number) => {
@@ -114,41 +113,59 @@ function ScratchBox({ label, value, onReveal }: { label: string; value: string; 
     if (!ctx) return;
     const rect = canvas.getBoundingClientRect();
     const ratio = window.devicePixelRatio || 1;
+
     ctx.save();
     ctx.scale(ratio, ratio);
     ctx.globalCompositeOperation = "destination-out";
     ctx.beginPath();
-    ctx.arc(clientX - rect.left, clientY - rect.top, 22, 0, Math.PI * 2);
+    ctx.arc(clientX - rect.left, clientY - rect.top, 24, 0, Math.PI * 2);
     ctx.fill();
     ctx.restore();
-    const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-    let clear = 0;
-    for (let i = 3; i < pixels.length; i += 80) if (pixels[i] === 0) clear++;
-    if (clear / (pixels.length / 80) > 0.34 && !hasRevealed.current) {
-      hasRevealed.current = true;
-      setRevealed(true);
-      onReveal();
+
+    if (!hasRevealed.current) {
+      const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+      let clear = 0;
+      const totalCheck = pixels.length / 32;
+      for (let i = 3; i < pixels.length; i += 32) {
+        if (pixels[i] === 0) clear++;
+      }
+      if (clear / totalCheck > 0.40) {
+        hasRevealed.current = true;
+        onReveal();
+      }
     }
   };
 
   return (
     <div className="scratch-item">
-      {/* Revealed content: both label and date number in beautiful font */}
+      {/* Revealed content underneath */}
       <div className="revealed-content">
         <span className="revealed-label">{label}</span>
         <strong className="revealed-value">{value}</strong>
       </div>
-      {!revealed && (
-        <canvas
-          ref={canvasRef}
-          aria-label={`Scratch to reveal ${label}`}
-          onPointerDown={(event) => {
+      <canvas
+        ref={canvasRef}
+        aria-label={`Scratch to reveal ${label}`}
+        onPointerDown={(event) => {
+          event.preventDefault();
+          try {
             event.currentTarget.setPointerCapture(event.pointerId);
+          } catch {}
+          scratch(event.clientX, event.clientY);
+        }}
+        onPointerMove={(event) => {
+          if (event.buttons === 1 || event.pointerType === "touch") {
+            event.preventDefault();
             scratch(event.clientX, event.clientY);
-          }}
-          onPointerMove={(event) => event.buttons === 1 && scratch(event.clientX, event.clientY)}
-        />
-      )}
+          }
+        }}
+        onPointerUp={(event) => {
+          try {
+            event.currentTarget.releasePointerCapture(event.pointerId);
+          } catch {}
+        }}
+        style={{ touchAction: "none" }}
+      />
     </div>
   );
 }
@@ -176,9 +193,11 @@ export function WeddingInvitation() {
   const [music, setMusic] = useState(false);
   const [progress, setProgress] = useState(0);
   const [revealedDates, setRevealedDates] = useState(0);
+  const [showEndPopup, setShowEndPopup] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const swipeStart = useRef(0);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const hasShownPopup = useRef(false);
 
   useEffect(() => {
     return () => {
@@ -239,6 +258,11 @@ export function WeddingInvitation() {
           element.dataset["visible"] = "true";
         }
       });
+      // Show end popup once when user reaches bottom
+      if (!hasShownPopup.current && total > 0 && window.scrollY >= total - 40) {
+        hasShownPopup.current = true;
+        setTimeout(() => setShowEndPopup(true), 600);
+      }
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -409,15 +433,15 @@ export function WeddingInvitation() {
             <h2>A perfect day awaits</h2>
             <p className="section-intro">Gently scratch each olive panel to reveal when our forever begins.</p>
             <div className="scratch-grid">
-              <ScratchBox label="Day" value="21" onReveal={() => setRevealedDates((count) => count + 1)} />
-              <ScratchBox label="Month" value="JUN" onReveal={() => setRevealedDates((count) => count + 1)} />
-              <ScratchBox label="Year" value="2027" onReveal={() => setRevealedDates((count) => count + 1)} />
+              <ScratchBox label="Day" value="07" onReveal={() => setRevealedDates((count) => count + 1)} />
+              <ScratchBox label="Month" value="OCT" onReveal={() => setRevealedDates((count) => count + 1)} />
+              <ScratchBox label="Year" value="2026" onReveal={() => setRevealedDates((count) => count + 1)} />
             </div>
             {revealedDates === 3 && (
               <div className="date-celebration" role="status">
                 <div className="celebration-sparkles" aria-hidden="true">✦ ✧ ✦</div>
                 <strong>Our forever begins</strong>
-                <span className="celebration-date">21 June 2027</span>
+                <span className="celebration-date">07 October 2026</span>
               </div>
             )}
           </section>
@@ -450,7 +474,7 @@ export function WeddingInvitation() {
                 </p>
               </div>
 
-              <strong className="card-event-date">MONDAY · 21 June · 2027</strong>
+              <strong className="card-event-date">WEDNESDAY · 07 OCTOBER · 2026</strong>
               <span className="card-event-venue">at Château in Occitanie, France</span>
             </div>
           </section>
@@ -509,9 +533,77 @@ export function WeddingInvitation() {
             <img className="torn-edge torn-edge-bottom" src={bottomTornEdge} alt="" aria-hidden="true" />
             <div data-reveal><p className="eyebrow">The celebrations</p><h2>Join us for</h2></div>
             <div className="event-list">
-              <article className="event-card event-engagement" style={{ backgroundImage: `url(${engagementImage})` }} data-reveal><span>01</span><div><Heart /><p>Tuesday · October 13</p><h3>Engagement</h3><p>3:00 in the evening · J.C. Community Hall, Siluvaipuram</p><small>An evening of blessings, laughter & celebration</small><div className="mt-5"><Button asChild variant="outline" className="bg-transparent border-white/40 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm"><a href="https://maps.app.goo.gl/vwfTitZmioioe1EC8?g_st=aw" target="_blank" rel="noreferrer"><MapPin className="mr-2 h-4 w-4" /> View Map</a></Button></div></div></article>
-              <article className="event-card event-wedding" style={{ backgroundImage: `url(${weddingImage})` }} data-reveal><span>02</span><div><CalendarDays /><p>Wednesday · October 14</p><h3>Wedding</h3><p>11:00 in the morning · St.Mary's Church, Vallavilai</p><small></small><div className="mt-5"><Button asChild variant="outline" className="bg-transparent border-white/40 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm"><a href="https://maps.app.goo.gl/yDX9gXNNEFK3rAhq7?g_st=aw" target="_blank" rel="noreferrer"><MapPin className="mr-2 h-4 w-4" /> View Map</a></Button></div></div></article>
-              <article className="event-card event-reception"  style={{ backgroundImage: `url(${receptionImage})` }} data-reveal><span>03</span><div><CalendarDays /><p>Wednesday · October 14</p><h3>Reception</h3><p>1:00 in the Afternoon ·  St.Mary's Community Hall, Vallavilai</p><small>Celebration with cocktails, dinner & dancing · Formal Indian attire</small><div className="mt-5"><Button asChild variant="outline" className="bg-transparent border-white/40 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm"><a href="https://maps.app.goo.gl/hgjhZnmWVZ2ZWevT6?g_st=aw" target="_blank" rel="noreferrer"><MapPin className="mr-2 h-4 w-4" /> View Map</a></Button></div></div></article>
+              {/* Engagement Card */}
+              <article className="event-card event-engagement" style={{ backgroundImage: `url(${engagementImage})` }} data-reveal>
+                <a
+                  className="event-card-link"
+                  href="https://maps.app.goo.gl/vwfTitZmioioe1EC8?g_st=aw"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Open Engagement venue on Google Maps"
+                />
+                <span>01</span>
+                <div className="event-card-body">
+                  <Heart />
+                  <p>Tuesday · October 13</p>
+                  <h3>Engagement</h3>
+                  <p>3:00 in the evening · J.C. Community Hall, Siluvaipuram</p>
+                  <small>An evening of blessings, laughter &amp; celebration</small>
+                  <div className="mt-5">
+                    <Button asChild variant="outline" className="bg-transparent border-white/40 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm event-map-btn">
+                      <a href="https://maps.app.goo.gl/vwfTitZmioioe1EC8?g_st=aw" target="_blank" rel="noreferrer"><MapPin className="mr-2 h-4 w-4" /> View Map</a>
+                    </Button>
+                  </div>
+                </div>
+              </article>
+
+              {/* Wedding Card */}
+              <article className="event-card event-wedding" style={{ backgroundImage: `url(${weddingImage})` }} data-reveal>
+                <a
+                  className="event-card-link"
+                  href="https://maps.app.goo.gl/yDX9gXNNEFK3rAhq7?g_st=aw"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Open Wedding venue on Google Maps"
+                />
+                <span>02</span>
+                <div className="event-card-body">
+                  <CalendarDays />
+                  <p>Wednesday · October 7</p>
+                  <h3>Wedding</h3>
+                  <p>11:00 in the morning · St.Mary's Church, Vallavilai</p>
+                  <small></small>
+                  <div className="mt-5">
+                    <Button asChild variant="outline" className="bg-transparent border-white/40 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm event-map-btn">
+                      <a href="https://maps.app.goo.gl/yDX9gXNNEFK3rAhq7?g_st=aw" target="_blank" rel="noreferrer"><MapPin className="mr-2 h-4 w-4" /> View Map</a>
+                    </Button>
+                  </div>
+                </div>
+              </article>
+
+              {/* Reception Card */}
+              <article className="event-card event-reception" style={{ backgroundImage: `url(${receptionImage})` }} data-reveal>
+                <a
+                  className="event-card-link"
+                  href="https://maps.app.goo.gl/hgjhZnmWVZ2ZWevT6?g_st=aw"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Open Reception venue on Google Maps"
+                />
+                <span>03</span>
+                <div className="event-card-body">
+                  <CalendarDays />
+                  <p>Wednesday · October 7</p>
+                  <h3>Reception</h3>
+                  <p>1:00 in the Afternoon · St.Mary's Community Hall, Vallavilai</p>
+                  <small>Celebration with cocktails, dinner &amp; dancing · Formal Indian attire</small>
+                  <div className="mt-5">
+                    <Button asChild variant="outline" className="bg-transparent border-white/40 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm event-map-btn">
+                      <a href="https://maps.app.goo.gl/hgjhZnmWVZ2ZWevT6?g_st=aw" target="_blank" rel="noreferrer"><MapPin className="mr-2 h-4 w-4" /> View Map</a>
+                    </Button>
+                  </div>
+                </div>
+              </article>
             </div>
           </section>
 
@@ -582,6 +674,34 @@ export function WeddingInvitation() {
             <div className="final-shade" />
             <div data-reveal><Sparkles /><p className="eyebrow">With you, always</p><h2>And So Our<br /><em>Forever Begins...</em></h2><p>07 · 10 · 2026</p><span>Subin &amp; Siluvaidhasi</span></div>
           </section>
+
+          {/* ── End-of-page Popup ── */}
+          {showEndPopup && (
+            <div className="end-popup-backdrop" role="dialog" aria-modal="true" aria-label="Another invitation" onClick={(e) => { if (e.target === e.currentTarget) setShowEndPopup(false); }}>
+              <div className="end-popup">
+                <button className="end-popup-close" onClick={() => setShowEndPopup(false)} aria-label="Close">
+                  <X size={18} />
+                </button>
+                <div className="end-popup-icon" aria-hidden="true">✦</div>
+                <p className="end-popup-eyebrow">While you're here</p>
+                <h2 className="end-popup-title">Another Love Story Awaits</h2>
+                <p className="end-popup-body">
+                  My brother is also getting married soon — close in date to ours.
+                  His wedding invitation is just as heartfelt, and we'd love for you to witness that celebration too.
+                </p>
+                <a
+                  href="https://velvet-stories26.github.io/radiant-vows-invites/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="end-popup-btn"
+                  onClick={() => setShowEndPopup(false)}
+                >
+                  <Heart size={14} /> View His Invitation
+                </a>
+                <button className="end-popup-skip" onClick={() => setShowEndPopup(false)}>Maybe later</button>
+              </div>
+            </div>
+          )}
 
           {lightbox !== null && (
             <div className="lightbox" role="dialog" aria-modal="true" aria-label="Photo gallery" onPointerDown={(event) => { swipeStart.current = event.clientX; }} onPointerUp={(event) => { const distance = event.clientX - swipeStart.current; if (Math.abs(distance) > 40) moveLightbox(distance > 0 ? -1 : 1); }}>
