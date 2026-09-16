@@ -681,10 +681,11 @@ export function WeddingInvitation() {
           </section>
 
           {/* End button to trigger brother's wedding popup */}
-                    <div className="end-popup-trigger-wrapper" style={{ textAlign: 'center', marginTop: '2rem', marginBottom: '4rem' }}>
-            <Button className="end-popup-trigger" onClick={() => setShowEndPopup(true)}>
-              Don't forget to click here for my brother's invitation
-            </Button>
+          <div className="end-popup-trigger-wrapper">
+            <button className="end-popup-trigger" onClick={() => setShowEndPopup(true)}>
+              <Sparkles size={15} />
+              <span>Don't forget to click here for my brother's invitation</span>
+            </button>
           </div>
 
           {/* ── End-of-page Popup ── */}
