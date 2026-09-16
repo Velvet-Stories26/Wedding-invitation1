@@ -258,11 +258,7 @@ export function WeddingInvitation() {
           element.dataset["visible"] = "true";
         }
       });
-      // Show end popup once when user reaches near the bottom
-      if (!hasShownPopup.current && total > 0 && window.scrollY >= total - 120) {
-        hasShownPopup.current = true;
-        setTimeout(() => setShowEndPopup(true), 600);
-      }
+      // End popup now triggered by button click
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -282,17 +278,7 @@ export function WeddingInvitation() {
     };
   }, [contentRevealed]);
 
-  // Fallback: show popup 30s after invitation opens (in case user doesn't scroll far enough)
-  useEffect(() => {
-    if (!contentRevealed) return;
-    const popupFallback = setTimeout(() => {
-      if (!hasShownPopup.current) {
-        hasShownPopup.current = true;
-        setShowEndPopup(true);
-      }
-    }, 30000);
-    return () => clearTimeout(popupFallback);
-  }, [contentRevealed]);
+  // End popup now triggered by button click
 
   useEffect(() => {
     if (revealedDates === 3) {
@@ -685,9 +671,18 @@ export function WeddingInvitation() {
             <img src={laughImage} alt="Subin and Siluvaidhasi laughing together at dusk" width={1280} height={912} loading="lazy" />
             <div className="final-shade" />
             <div data-reveal><Sparkles /><p className="eyebrow">With you, always</p><h2>And So Our<br /><em>Forever Begins...</em></h2><p>07 · 10 · 2026</p><span>Subin &amp; Siluvaidhasi</span></div>
+          
           </section>
 
+          {/* End button to trigger brother's wedding popup */}
+          <div className="end-popup-trigger-wrapper" style={{ textAlign: 'center', marginTop: '2rem' }}>
+            <Button className="end-popup-trigger" onClick={() => setShowEndPopup(true)}>
+              Don't forget to click here for my brother's invitation
+            </Button>
+          </div>
+
           {/* ── End-of-page Popup ── */}
+        
           {showEndPopup && (
             <div className="end-popup-backdrop" role="dialog" aria-modal="true" aria-label="Another invitation" onClick={(e) => { if (e.target === e.currentTarget) setShowEndPopup(false); }}>
               <div className="end-popup">

@@ -2859,7 +2859,7 @@ a {
   align-items: flex-end;
   justify-content: center;
   padding: 1.5rem 1rem;
-  background: rgba(8, 20, 10, 0.55);
+  background: rgba(230, 240, 220, 0.85);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   animation: backdropIn 0.35s ease both;
