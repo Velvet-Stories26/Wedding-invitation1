@@ -664,7 +664,6 @@ a {
   padding: 6rem 1.4rem
 }
 
-.date-reveal-section,
 .countdown-section,
 .polaroid-section,
 .paper-section,
@@ -679,16 +678,19 @@ a {
   color: #ffffff;
 }
 
+/* date-reveal-section has its own bg image from inline style — must NOT be in the !important white group */
 .date-reveal-section {
-  background: #fcfbfa !important; /* Warm ivory/cream background */
-  color: #fcfbfa; /* For torn edge matching */
+  text-align: center;
+  position: relative;
+  color: #1b3a20;
 }
 
 .date-reveal-section::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.03"/></svg>');
+  /* Light overlay so bg image is clearly visible but text stays readable */
+  background: rgba(245, 248, 242, 0.40);
   pointer-events: none;
   z-index: 1;
 }
@@ -759,15 +761,17 @@ a {
 .scratch-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  max-width: 44rem;
-  margin: 3rem auto 4rem auto;
+  gap: 1.2rem;
+  max-width: 38rem;
+  margin: 2.5rem auto 4rem auto;
+  padding: 0 1.5rem;
 }
 
 @media (max-width: 768px) {
   .scratch-grid {
-    gap: 0.8rem;
+    gap: 0.7rem;
     padding: 0 1rem;
+    max-width: 100%;
   }
 }
 
@@ -780,9 +784,9 @@ a {
   justify-content: center;
   border: none;
   border-radius: 0;
-  /* Green-to-white gradient so the revealed state shows mixed green/white feel */
-  background: radial-gradient(ellipse at center, #ffffff 35%, #dde9d5 100%);
-  box-shadow: 0 8px 32px rgba(20, 35, 10, 0.1), 0 2px 8px rgba(0,0,0,0.04);
+  /* Pure white base — the contained scratch image sits cleanly on white */
+  background: #ffffff;
+  box-shadow: 0 6px 24px rgba(20, 35, 10, 0.18), 0 2px 8px rgba(0,0,0,0.06);
   overflow: hidden;
   user-select: none;
   -webkit-user-select: none;

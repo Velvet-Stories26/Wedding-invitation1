@@ -29,6 +29,7 @@ import receptionImage from "@/assets/invitaion1-bg.png";
 import dayImg from "@/assets/day.png";
 import monthImg from "@/assets/month.png";
 import yearImg from "@/assets/year.png";
+import countdownBg from "@/assets/countdown-bg.png";
 import topTornEdge from "@/assets/top-torn-svg.svg";
 import bottomTornEdge from "@/assets/bottom-torn-svg.svg";
 import letterClosedImage from "@/assets/letter.png";
@@ -86,29 +87,26 @@ function ScratchBox({ label, value, coverImage, onReveal }: { label: string; val
       if (coverImage) {
         const img = new Image();
         img.onload = () => {
+          // object-fit: cover — fill the entire square, crop excess, centred
           const imgRatio = img.width / img.height;
           const canvasRatio = rect.width / rect.height;
-          let drawWidth = rect.width;
-          let drawHeight = rect.height;
-          let offsetX = 0;
-          let offsetY = 0;
+          let drawWidth: number;
+          let drawHeight: number;
 
           if (imgRatio > canvasRatio) {
+            // image is wider — fit by height, crop sides
+            drawHeight = rect.height;
             drawWidth = rect.height * imgRatio;
-            offsetX = (rect.width - drawWidth) / 2;
           } else {
+            // image is taller — fit by width, crop top/bottom
+            drawWidth = rect.width;
             drawHeight = rect.width / imgRatio;
-            offsetY = (rect.height - drawHeight) / 2;
           }
 
-          // Apply a 15% zoom to crop out the baked-in rounded corners and white padding from the uploaded images
-          const zoom = 1.15;
-          const zoomedWidth = drawWidth * zoom;
-          const zoomedHeight = drawHeight * zoom;
-          const zoomOffsetX = offsetX - (zoomedWidth - drawWidth) / 2;
-          const zoomOffsetY = offsetY - (zoomedHeight - drawHeight) / 2;
+          const offsetX = (rect.width - drawWidth) / 2;
+          const offsetY = (rect.height - drawHeight) / 2;
 
-          ctx.drawImage(img, zoomOffsetX, zoomOffsetY, zoomedWidth, zoomedHeight);
+          ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
         };
         img.src = coverImage;
       } else {
@@ -458,7 +456,7 @@ export function WeddingInvitation() {
             </div>
           </section>
 
-          <section className="paper-section date-reveal-section torn-section" data-reveal>
+          <section className="paper-section date-reveal-section torn-section" data-reveal style={{ backgroundImage: `url(${countdownBg})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
             <img className="torn-edge torn-edge-top" src={topTornEdge} alt="" aria-hidden="true" />
             <img className="torn-edge torn-edge-bottom" src={bottomTornEdge} alt="" aria-hidden="true" />
             <p className="eyebrow">Save our date</p>
