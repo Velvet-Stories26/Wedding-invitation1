@@ -519,7 +519,9 @@ export function WeddingInvitation() {
             </div>
           </section>
 
-          <section className="polaroid-section">
+          <section className="polaroid-section paper-section torn-section">
+            <img className="torn-edge torn-edge-top" src={topTornEdge} alt="" aria-hidden="true" />
+            <img className="torn-edge torn-edge-bottom" src={bottomTornEdge} alt="" aria-hidden="true" />
             <div data-reveal><p className="eyebrow">Little pieces of us</p><h2>Polaroid memories</h2></div>
             <div className="polaroids">
               {[walkImage, laughImage, ringsImage].map((src, index) => <figure key={src}><img src={src} alt={["A walk to remember", "The laugh we love", "A promise in gold"][index]} width={500} height={600} loading="lazy" /><figcaption>{["the long way home", "always laughing", "the promise"][index]}</figcaption></figure>)}

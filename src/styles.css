@@ -657,6 +657,7 @@ a {
 
 .paper-section,
 .countdown-section,
+.polaroid-section,
 .gallery-section,
 .events-section,
 .faq-section {
@@ -664,6 +665,8 @@ a {
 }
 
 .date-reveal-section,
+.countdown-section,
+.polaroid-section,
 .paper-section,
 .events-section,
 .letter-section,
@@ -673,6 +676,7 @@ a {
   text-align: center;
   background: #ffffff !important;
   box-shadow: inset 0 0 60px rgba(225, 235, 217, 0.35);
+  color: #ffffff;
 }
 
 .torn-section {
@@ -688,6 +692,8 @@ a {
   z-index: 3;
   display: block;
   pointer-events: none;
+  fill: currentColor;
+  color: #ffffff;
 }
 
 .torn-edge-top {
