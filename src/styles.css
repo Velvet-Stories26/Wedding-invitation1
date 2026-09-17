@@ -860,6 +860,25 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+/* Invitation text colors - Emerald tone */
+.invitation-band .formal-card .script-title,
+.invitation-band .formal-card .card-person-name,
+.invitation-band .formal-card .parent-label,
+.invitation-band .formal-card .parent-names,
+.invitation-band .formal-card .card-event-date,
+.invitation-band .formal-card .card-event-venue {
+  color: #0E3D21;
+}
+
+/* Ensure centered alignment for invitation content */
+.invitation-band {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
   align-items: center;
   margin: 0 auto;
   background: transparent !important;
