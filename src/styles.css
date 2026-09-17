@@ -1469,10 +1469,27 @@ a {
 }
 
 .event-list p {
-  font: 500 .62rem var(--font-sans);
+  font: 500 1.05rem var(--font-sans);
   text-transform: uppercase;
-  letter-spacing: .12em;
-  color: color-mix(in oklab, #fff 82%, transparent)
+  letter-spacing: .1em;
+  color: color-mix(in oklab, #fff 90%, transparent);
+  line-height: 1.4;
+}
+
+.event-list .event-card-body p:first-of-type {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  color: var(--champagne, #f7e7ce);
+  margin-bottom: 0.35rem;
+}
+
+.event-list .event-card-body p:nth-of-type(2) {
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  color: color-mix(in oklab, #fff 92%, transparent);
+  margin-top: 0.35rem;
 }
 
 .event-list h3 {
