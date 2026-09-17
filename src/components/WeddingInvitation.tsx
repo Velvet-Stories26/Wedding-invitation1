@@ -26,6 +26,9 @@ import invLetterBg from "@/assets/inv-letter.png";
 import engagementImage from "@/assets/engagement.png";
 import weddingImage from "@/assets/wedding.png";
 import receptionImage from "@/assets/invitaion1-bg.png";
+import dayImg from "@/assets/day.png";
+import monthImg from "@/assets/month.png";
+import yearImg from "@/assets/year.png";
 import topTornEdge from "@/assets/top-torn-svg.svg";
 import bottomTornEdge from "@/assets/bottom-torn-svg.svg";
 import letterClosedImage from "@/assets/letter.png";
@@ -62,7 +65,7 @@ function useCountdown() {
   return time;
 }
 
-function ScratchBox({ label, value, onReveal }: { label: string; value: string; onReveal: () => void }) {
+function ScratchBox({ label, value, coverImage, onReveal }: { label: string; value: string; coverImage?: string; onReveal: () => void }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const hasRevealed = useRef(false);
 
@@ -80,80 +83,62 @@ function ScratchBox({ label, value, onReveal }: { label: string; value: string; 
       canvas.height = Math.floor(rect.height * ratio);
       ctx.scale(ratio, ratio);
 
-      // Elegant olive green gradient cover
-      const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
-      gradient.addColorStop(0, "#4a6344"); // Muted light olive
-      gradient.addColorStop(0.5, "#2d4427"); // Deep olive
-      gradient.addColorStop(1, "#152411"); // Dark emerald/olive
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, rect.width + 10, rect.height + 10);
+      if (coverImage) {
+        const img = new Image();
+        img.onload = () => {
+          const imgRatio = img.width / img.height;
+          const canvasRatio = rect.width / rect.height;
+          let drawWidth = rect.width;
+          let drawHeight = rect.height;
+          let offsetX = 0;
+          let offsetY = 0;
 
-      // Subtle texture overlay (light noise)
-      ctx.fillStyle = "rgba(255, 255, 255, 0.02)";
-      for (let i = 0; i < rect.width; i += 4) {
-        for (let j = 0; j < rect.height; j += 4) {
-          if (Math.random() > 0.5) {
-            ctx.fillRect(i, j, 2, 2);
+          if (imgRatio > canvasRatio) {
+            drawWidth = rect.height * imgRatio;
+            offsetX = (rect.width - drawWidth) / 2;
+          } else {
+            drawHeight = rect.width / imgRatio;
+            offsetY = (rect.height - drawHeight) / 2;
           }
-        }
-      }
 
-      // Draw thin decorative lines
-      ctx.strokeStyle = "rgba(225, 235, 210, 0.45)";
-      ctx.lineWidth = 1;
-      
-      const lineY = rect.height / 2 + 15;
-      ctx.beginPath();
-      ctx.moveTo(rect.width * 0.2, lineY);
-      ctx.lineTo(rect.width * 0.45, lineY);
-      ctx.stroke();
+          // Apply a 15% zoom to crop out the baked-in rounded corners and white padding from the uploaded images
+          const zoom = 1.15;
+          const zoomedWidth = drawWidth * zoom;
+          const zoomedHeight = drawHeight * zoom;
+          const zoomOffsetX = offsetX - (zoomedWidth - drawWidth) / 2;
+          const zoomOffsetY = offsetY - (zoomedHeight - drawHeight) / 2;
 
-      ctx.beginPath();
-      ctx.moveTo(rect.width * 0.55, lineY);
-      ctx.lineTo(rect.width * 0.8, lineY);
-      ctx.stroke();
-
-      // Tiny diamond
-      ctx.fillStyle = "rgba(225, 235, 210, 0.8)";
-      ctx.beginPath();
-      ctx.moveTo(rect.width * 0.5, lineY - 4);
-      ctx.lineTo(rect.width * 0.5 + 4, lineY);
-      ctx.lineTo(rect.width * 0.5, lineY + 4);
-      ctx.lineTo(rect.width * 0.5 - 4, lineY);
-      ctx.fill();
-      
-      // Simple leaf motif above text
-      ctx.save();
-      ctx.translate(rect.width / 2, rect.height * 0.25);
-      ctx.scale(0.8, 0.8);
-      ctx.fillStyle = "rgba(225, 235, 210, 0.6)";
-      ctx.beginPath();
-      ctx.moveTo(0, 8);
-      ctx.bezierCurveTo(-15, 8, -15, -12, 0, -18);
-      ctx.bezierCurveTo(15, -12, 15, 8, 0, 8);
-      ctx.fill();
-      ctx.restore();
-
-      // Cover title in elegant Italiana / Cormorant serif font
-      ctx.fillStyle = "#fdfbf7";
-      ctx.font = "400 18px 'Italiana', 'Cormorant Garamond', serif";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      // Manually add letter spacing by drawing text (since letterSpacing isn't perfectly supported in all 2D contexts)
-      const text = label.toUpperCase();
-      let x = rect.width / 2 - ((text.length - 1) * 3) / 2; // Approximate centering with 3px spacing
-      if (typeof (ctx as any).letterSpacing !== "undefined") {
-        (ctx as any).letterSpacing = "3px";
-        ctx.fillText(text, rect.width / 2, rect.height / 2 - 2);
+          ctx.drawImage(img, zoomOffsetX, zoomOffsetY, zoomedWidth, zoomedHeight);
+        };
+        img.src = coverImage;
       } else {
-        ctx.fillText(text, rect.width / 2, rect.height / 2 - 2);
+        // Fallback elegant olive green gradient cover
+        const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
+        gradient.addColorStop(0, "#4a6344"); 
+        gradient.addColorStop(0.5, "#2d4427"); 
+        gradient.addColorStop(1, "#152411"); 
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, rect.width + 10, rect.height + 10);
+  
+        // Cover title in elegant font
+        ctx.fillStyle = "#fdfbf7";
+        ctx.font = "400 18px 'Italiana', 'Cormorant Garamond', serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        const text = label.toUpperCase();
+        if (typeof (ctx as any).letterSpacing !== "undefined") {
+          (ctx as any).letterSpacing = "3px";
+          ctx.fillText(text, rect.width / 2, rect.height / 2 - 2);
+        } else {
+          ctx.fillText(text, rect.width / 2, rect.height / 2 - 2);
+        }
       }
     };
 
     initCanvas();
     window.addEventListener("resize", initCanvas);
     return () => window.removeEventListener("resize", initCanvas);
-  }, [label]);
+  }, [label, coverImage]);
 
   const scratch = (clientX: number, clientY: number) => {
     const canvas = canvasRef.current;
@@ -480,9 +465,9 @@ export function WeddingInvitation() {
             <h2>A perfect day awaits</h2>
             <p className="section-intro">Gently scratch each olive panel to reveal when our forever begins.</p>
             <div className="scratch-grid">
-              <ScratchBox label="Day" value="07" onReveal={() => setRevealedDates((count) => count + 1)} />
-              <ScratchBox label="Month" value="OCT" onReveal={() => setRevealedDates((count) => count + 1)} />
-              <ScratchBox label="Year" value="2026" onReveal={() => setRevealedDates((count) => count + 1)} />
+              <ScratchBox label="Day" value="07" coverImage={dayImg} onReveal={() => setRevealedDates((count) => count + 1)} />
+              <ScratchBox label="Month" value="OCT" coverImage={monthImg} onReveal={() => setRevealedDates((count) => count + 1)} />
+              <ScratchBox label="Year" value="2026" coverImage={yearImg} onReveal={() => setRevealedDates((count) => count + 1)} />
             </div>
             {revealedDates === 3 && (
               <div className="date-celebration" role="status">

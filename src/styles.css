@@ -780,7 +780,7 @@ a {
   justify-content: center;
   border: none;
   border-radius: 0;
-  background: linear-gradient(145deg, #e4eadc 0%, #c8d3bc 100%);
+  background: #ffffff; /* White background for the revealed state */
   box-shadow: 0 12px 30px rgba(20, 35, 10, 0.08), 0 4px 10px rgba(0,0,0,0.03);
   overflow: hidden;
   user-select: none;
