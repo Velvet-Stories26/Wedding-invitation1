@@ -679,6 +679,25 @@ a {
   color: #ffffff;
 }
 
+.date-reveal-section {
+  background: #fcfbfa !important; /* Warm ivory/cream background */
+  color: #fcfbfa; /* For torn edge matching */
+}
+
+.date-reveal-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.03"/></svg>');
+  pointer-events: none;
+  z-index: 1;
+}
+
+.date-reveal-section > * {
+  position: relative;
+  z-index: 2;
+}
+
 .torn-section {
   position: relative;
   overflow: hidden;
@@ -740,21 +759,29 @@ a {
 .scratch-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.8rem;
-  max-width: 32rem;
-  margin: 0 auto 3rem auto;
+  gap: 1.5rem;
+  max-width: 44rem;
+  margin: 3rem auto 4rem auto;
+}
+
+@media (max-width: 768px) {
+  .scratch-grid {
+    gap: 0.8rem;
+    padding: 0 1rem;
+  }
 }
 
 .scratch-item {
   position: relative;
-  height: 8.5rem;
+  aspect-ratio: 1 / 1;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
-  border-radius: 16px;
-  background: linear-gradient(145deg, #c4d6b3 0%, #aebf9b 100%);
-  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.4), 0 4px 18px rgba(0, 0, 0, 0.07);
+  border-radius: 0;
+  background: linear-gradient(145deg, #e4eadc 0%, #c8d3bc 100%);
+  box-shadow: 0 12px 30px rgba(20, 35, 10, 0.08), 0 4px 10px rgba(0,0,0,0.03);
   overflow: hidden;
   user-select: none;
   -webkit-user-select: none;
@@ -799,7 +826,7 @@ a {
   z-index: 10;
   width: 100%;
   height: 100%;
-  border-radius: 16px;
+  border-radius: 0;
   touch-action: none;
   cursor: crosshair;
 }

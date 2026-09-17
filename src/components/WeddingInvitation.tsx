@@ -80,25 +80,74 @@ function ScratchBox({ label, value, onReveal }: { label: string; value: string; 
       canvas.height = Math.floor(rect.height * ratio);
       ctx.scale(ratio, ratio);
 
-      // Solid 100% Opaque Dark Emerald-Olive Cover (BEFORE scratching - 0% leak)
+      // Elegant olive green gradient cover
       const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
-      gradient.addColorStop(0, "#233d28");
-      gradient.addColorStop(0.5, "#162a1b");
-      gradient.addColorStop(1, "#0d1d12");
+      gradient.addColorStop(0, "#4a6344"); // Muted light olive
+      gradient.addColorStop(0.5, "#2d4427"); // Deep olive
+      gradient.addColorStop(1, "#152411"); // Dark emerald/olive
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, rect.width + 10, rect.height + 10);
 
+      // Subtle texture overlay (light noise)
+      ctx.fillStyle = "rgba(255, 255, 255, 0.02)";
+      for (let i = 0; i < rect.width; i += 4) {
+        for (let j = 0; j < rect.height; j += 4) {
+          if (Math.random() > 0.5) {
+            ctx.fillRect(i, j, 2, 2);
+          }
+        }
+      }
+
+      // Draw thin decorative lines
+      ctx.strokeStyle = "rgba(225, 235, 210, 0.45)";
+      ctx.lineWidth = 1;
+      
+      const lineY = rect.height / 2 + 15;
+      ctx.beginPath();
+      ctx.moveTo(rect.width * 0.2, lineY);
+      ctx.lineTo(rect.width * 0.45, lineY);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(rect.width * 0.55, lineY);
+      ctx.lineTo(rect.width * 0.8, lineY);
+      ctx.stroke();
+
+      // Tiny diamond
+      ctx.fillStyle = "rgba(225, 235, 210, 0.8)";
+      ctx.beginPath();
+      ctx.moveTo(rect.width * 0.5, lineY - 4);
+      ctx.lineTo(rect.width * 0.5 + 4, lineY);
+      ctx.lineTo(rect.width * 0.5, lineY + 4);
+      ctx.lineTo(rect.width * 0.5 - 4, lineY);
+      ctx.fill();
+      
+      // Simple leaf motif above text
+      ctx.save();
+      ctx.translate(rect.width / 2, rect.height * 0.25);
+      ctx.scale(0.8, 0.8);
+      ctx.fillStyle = "rgba(225, 235, 210, 0.6)";
+      ctx.beginPath();
+      ctx.moveTo(0, 8);
+      ctx.bezierCurveTo(-15, 8, -15, -12, 0, -18);
+      ctx.bezierCurveTo(15, -12, 15, 8, 0, 8);
+      ctx.fill();
+      ctx.restore();
+
       // Cover title in elegant Italiana / Cormorant serif font
-      ctx.fillStyle = "#ffffff";
-      ctx.font = "600 15px 'Italiana', 'Cormorant Garamond', serif";
+      ctx.fillStyle = "#fdfbf7";
+      ctx.font = "400 18px 'Italiana', 'Cormorant Garamond', serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText(label.toUpperCase(), rect.width / 2, rect.height / 2 - 7);
-
-      // Subtle italic hint
-      ctx.fillStyle = "#b5c9a7";
-      ctx.font = "italic 400 10.5px 'Cormorant Garamond', serif";
-      ctx.fillText("scratch to reveal", rect.width / 2, rect.height / 2 + 13);
+      // Manually add letter spacing by drawing text (since letterSpacing isn't perfectly supported in all 2D contexts)
+      const text = label.toUpperCase();
+      let x = rect.width / 2 - ((text.length - 1) * 3) / 2; // Approximate centering with 3px spacing
+      if (typeof (ctx as any).letterSpacing !== "undefined") {
+        (ctx as any).letterSpacing = "3px";
+        ctx.fillText(text, rect.width / 2, rect.height / 2 - 2);
+      } else {
+        ctx.fillText(text, rect.width / 2, rect.height / 2 - 2);
+      }
     };
 
     initCanvas();
