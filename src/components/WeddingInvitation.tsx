@@ -112,12 +112,12 @@ function ScratchBox({ label, value, coverImage, onReveal }: { label: string; val
       } else {
         // Fallback elegant olive green gradient cover
         const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
-        gradient.addColorStop(0, "#4a6344"); 
-        gradient.addColorStop(0.5, "#2d4427"); 
-        gradient.addColorStop(1, "#152411"); 
+        gradient.addColorStop(0, "#4a6344");
+        gradient.addColorStop(0.5, "#2d4427");
+        gradient.addColorStop(1, "#152411");
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, rect.width + 10, rect.height + 10);
-  
+
         // Cover title in elegant font
         ctx.fillStyle = "#fdfbf7";
         ctx.font = "400 18px 'Italiana', 'Cormorant Garamond', serif";
@@ -182,7 +182,7 @@ function ScratchBox({ label, value, coverImage, onReveal }: { label: string; val
           event.preventDefault();
           try {
             event.currentTarget.setPointerCapture(event.pointerId);
-          } catch {}
+          } catch { }
           scratch(event.clientX, event.clientY);
         }}
         onPointerMove={(event) => {
@@ -194,7 +194,7 @@ function ScratchBox({ label, value, coverImage, onReveal }: { label: string; val
         onPointerUp={(event) => {
           try {
             event.currentTarget.releasePointerCapture(event.pointerId);
-          } catch {}
+          } catch { }
         }}
         style={{ touchAction: "none" }}
       />
@@ -202,11 +202,31 @@ function ScratchBox({ label, value, coverImage, onReveal }: { label: string; val
   );
 }
 
+function LeafSprigLeft() {
+  return (
+    <svg className="botanical-leaf-svg left-leaf" width="36" height="54" viewBox="0 0 36 54" fill="none" aria-hidden="true">
+      <path d="M18 48C18 48 24 32 34 24C34 24 22 26 18 34C14 26 2 24 2 24C12 32 18 48 18 48Z" fill="#A7C4A0" />
+      <path d="M18 50C18 50 26 18 34 8C34 8 22 14 18 26C14 14 2 8 2 8C10 18 18 50 18 50Z" stroke="#1B4332" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M18 52V2" stroke="#D4AF37" strokeWidth="1.2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function LeafSprigRight() {
+  return (
+    <svg className="botanical-leaf-svg right-leaf" width="36" height="54" viewBox="0 0 36 54" fill="none" aria-hidden="true" style={{ transform: 'scaleX(-1)' }}>
+      <path d="M18 48C18 48 24 32 34 24C34 24 22 26 18 34C14 26 2 24 2 24C12 32 18 48 18 48Z" fill="#A7C4A0" />
+      <path d="M18 50C18 50 26 18 34 8C34 8 22 14 18 26C14 14 2 8 2 8C10 18 18 50 18 50Z" stroke="#1B4332" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M18 52V2" stroke="#D4AF37" strokeWidth="1.2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 function FloralMark() {
   return (
     <div className="floral-mark" aria-hidden="true">
       <span />
-      <Heart size={12} fill="currentColor" />
+      <Heart size={14} fill="#D4AF37" color="#D4AF37" />
       <span />
     </div>
   );
@@ -295,13 +315,13 @@ export function WeddingInvitation() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    // 5-second delay after 2nd video begins before smoothly displaying hero names
+    // 1-second delay after 2nd video begins before smoothly displaying hero names
     const heroTimer = setTimeout(() => {
       const heroCopy = document.querySelector<HTMLElement>(".hero-copy");
       if (heroCopy) {
         heroCopy.dataset["visible"] = "true";
       }
-    }, 5000);
+    }, 1000);
 
     return () => {
       observer.disconnect();
@@ -320,7 +340,7 @@ export function WeddingInvitation() {
 
       const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min;
 
-      const interval: any = setInterval(function() {
+      const interval: any = setInterval(function () {
         const timeLeft = animationEnd - Date.now();
 
         if (timeLeft <= 0) {
@@ -420,7 +440,7 @@ export function WeddingInvitation() {
       {!contentRevealed && (
         <section id="invitation" className={opened ? "opening-screen is-open" : "opening-screen"}>
           <div className="opening-glow" />
-          <button 
+          <button
             className="image-envelope-wrap"
             onClick={handleOpen}
             aria-label="Open the wedding invitation"
@@ -509,16 +529,25 @@ export function WeddingInvitation() {
             </div>
           </section>
 
-          <section className="countdown-section torn-section" data-reveal>
+          <section className="countdown-section torn-section" data-reveal style={{ backgroundImage: `url(${countdownBg})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
             <img className="torn-edge torn-edge-top" src={topTornEdge} alt="" aria-hidden="true" />
             <img className="torn-edge torn-edge-bottom" src={bottomTornEdge} alt="" aria-hidden="true" />
-            <p className="eyebrow">Counting every heartbeat</p>
-            <h2>Until we say “I do”</h2>
-            <div className="countdown">
-              {Object.entries(countdown).map(([label, value]) => <div key={label}><strong>{mounted ? String(value).padStart(2, "0") : "00"}</strong><span>{label}</span></div>)}
+            <p className="eyebrow">TILL OUR BIG DAY</p>
+            <h2>Countdown</h2>
+            <div className="countdown-flanked-wrapper" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1.5rem', width: '100%' }}>
+              <LeafSprigLeft />
+              <div className="countdown">
+                {Object.entries(countdown).map(([label, value]) => (
+                  <div key={label}>
+                    <strong>{mounted ? String(value).padStart(2, "0") : "00"}</strong>
+                    <span>{label}</span>
+                  </div>
+                ))}
+              </div>
+              <LeafSprigRight />
             </div>
           </section>
-                    <section id="memories" className="slideshow-section">
+          <section id="memories" className="slideshow-section">
             {gallery.map((image, index) => <img key={image.src} className={slide === index ? "active" : ""} src={image.src} alt={image.alt} width={1280} height={index === 0 ? 1536 : 912} loading="lazy" />)}
             <div className="slideshow-shade" />
             <div className="slideshow-copy" data-reveal><p className="eyebrow">Beautiful memories</p><h2>Every frame, a chapter</h2><p>Of laughter held close and moments we will carry into forever.</p></div>
@@ -639,56 +668,56 @@ export function WeddingInvitation() {
             </div>
           </section>
 
-         <section className={`letter-section ${letterOpen ? "is-open" : ""} torn-section`}>
-          <img className="torn-edge torn-edge-top" src={topTornEdge} alt="" aria-hidden="true" />
-          <img className="torn-edge torn-edge-bottom" src={bottomTornEdge} alt="" aria-hidden="true" />
-          <div className="letter-header" data-reveal>
-            <p className="eyebrow">A little note for you</p>
-            <h2>Words From Our Hearts</h2>
-          </div>
+          <section className={`letter-section ${letterOpen ? "is-open" : ""} torn-section`}>
+            <img className="torn-edge torn-edge-top" src={topTornEdge} alt="" aria-hidden="true" />
+            <img className="torn-edge torn-edge-bottom" src={bottomTornEdge} alt="" aria-hidden="true" />
+            <div className="letter-header" data-reveal>
+              <p className="eyebrow">A little note for you</p>
+              <h2>Words From Our Hearts</h2>
+            </div>
 
-          <div className={`image-letter-wrapper ${letterOpen ? "is-open" : ""}`} data-reveal>
-            {/* Closed envelope image */}
-            <div className="letter-closed-img">
-              <img src={letterClosedImage} alt="Sealed love letter envelope" width={1200} height={700} />
-              {!letterOpen && (
-                <button
-                  className="letter-img-seal"
-                  onClick={() => setLetterOpen(true)}
-                  aria-label="Open our love letter"
-                  title="Click seal to open letter"
-                />
+            <div className={`image-letter-wrapper ${letterOpen ? "is-open" : ""}`} data-reveal>
+              {/* Closed envelope image */}
+              <div className="letter-closed-img">
+                <img src={letterClosedImage} alt="Sealed love letter envelope" width={1200} height={700} />
+                {!letterOpen && (
+                  <button
+                    className="letter-img-seal"
+                    onClick={() => setLetterOpen(true)}
+                    aria-label="Open our love letter"
+                    title="Click seal to open letter"
+                  />
+                )}
+              </div>
+
+              {/* Open envelope image */}
+              <div className="letter-open-img">
+                <img src={letterOpenImage} alt="Opened love letter with heartfelt message" width={1200} height={1200} />
+              </div>
+
+              {/* Caption */}
+              <div className="letter-caption">
+                <span className="caption-line" />
+                <div className="caption-content">
+                  <span className="caption-icon">✦</span>
+                  <p>{letterOpen ? "A message held in our hearts" : "Tap the seal to open our letter"}</p>
+                </div>
+                <span className="caption-line" />
+              </div>
+
+              {/* Heartfelt message quote */}
+              {letterOpen && (
+                <div className="letter-quote-box" style={{ marginTop: '2rem', maxWidth: '32rem', textAlign: 'center', padding: '0 1rem' }}>
+                  <p style={{ fontStyle: 'italic', fontSize: '1.1rem', lineHeight: '1.7', color: '#1b3a20', fontFamily: 'var(--font-serif)', margin: '0 0 0.6rem' }}>
+                    “To our beloved family and friends — thank you for walking beside us, sharing in our joy, and filling our lives with so much love as we begin our forever.”
+                  </p>
+                  <span style={{ display: 'inline-block', fontSize: '0.82rem', color: '#3b5836', letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 600 }}>
+                    — Sujin &amp; Jeneesha —
+                  </span>
+                </div>
               )}
             </div>
-
-            {/* Open envelope image */}
-            <div className="letter-open-img">
-              <img src={letterOpenImage} alt="Opened love letter with heartfelt message" width={1200} height={1200} />
-            </div>
-
-            {/* Caption */}
-            <div className="letter-caption">
-              <span className="caption-line" />
-              <div className="caption-content">
-                <span className="caption-icon">✦</span>
-                <p>{letterOpen ? "A message held in our hearts" : "Tap the seal to open our letter"}</p>
-              </div>
-              <span className="caption-line" />
-            </div>
-
-            {/* Heartfelt message quote */}
-            {letterOpen && (
-              <div className="letter-quote-box" style={{ marginTop: '2rem', maxWidth: '32rem', textAlign: 'center', padding: '0 1rem' }}>
-                <p style={{ fontStyle: 'italic', fontSize: '1.1rem', lineHeight: '1.7', color: '#1b3a20', fontFamily: 'var(--font-serif)', margin: '0 0 0.6rem' }}>
-                  “To our beloved family and friends — thank you for walking beside us, sharing in our joy, and filling our lives with so much love as we begin our forever.”
-                </p>
-                <span style={{ display: 'inline-block', fontSize: '0.82rem', color: '#3b5836', letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 600 }}>
-                  — Sujin &amp; Jeneesha —
-                </span>
-              </div>
-            )}
-          </div>
-        </section>
+          </section>
 
           {/* <section id="venue" className="venue-section paper-section">
             <div className="venue-image"><img src={heroImage} alt="Palace gardens at the wedding venue" width={1024} height={1536} loading="lazy" /></div>
@@ -711,7 +740,7 @@ export function WeddingInvitation() {
             <img src={laughImage} alt="Subin and Siluvaidhasi laughing together at dusk" width={1280} height={912} loading="lazy" />
             <div className="final-shade" />
             <div data-reveal><Sparkles /><p className="eyebrow">With you, always</p><h2>And So Our<br /><em>Forever Begins...</em></h2><p>07 · 10 · 2026</p><span>Subin &amp; Siluvaidhasi</span></div>
-          
+
           </section>
 
           {/* End button to trigger brother's wedding popup */}
@@ -723,7 +752,7 @@ export function WeddingInvitation() {
           </div>
 
           {/* ── End-of-page Popup ── */}
-        
+
           {showEndPopup && (
             <div className="end-popup-backdrop" role="dialog" aria-modal="true" aria-label="Brother's Wedding Invitation" onClick={(e) => { if (e.target === e.currentTarget) setShowEndPopup(false); }}>
               <div className="end-popup">
