@@ -9,6 +9,7 @@ import {
   MapPin,
   Menu,
   Music2,
+  Navigation,
   Pause,
   Play,
   Sparkles,
@@ -29,7 +30,8 @@ import receptionImage from "@/assets/reception.png";
 import dayImg from "@/assets/day.png";
 import monthImg from "@/assets/month.png";
 import yearImg from "@/assets/year.png";
-import scratchBg from "@/assets/scratch-bg.png";
+import scratchBg from "@/assets/scratch-bg.png";
+
 import letterClosedImage from "@/assets/letter.png";
 import letterOpenImage from "@/assets/letter-open.png";
 import musicFile from "@/assets/music.mp3";
@@ -754,9 +756,9 @@ export function WeddingInvitation() {
                   rel="noreferrer"
                   aria-label="Open Reception venue on Google Maps"
                 />
-                <span className="event-card-number">03</span>
+                {/* <span className="event-card-number">03</span> */}
                 
-                <div className="event-card-body">
+                {/* <div className="event-card-body">
                   <div className="event-date-row">
                     <CalendarDays className="event-date-icon" />
                     <span className="event-date-label">WEDNESDAY · OCTOBER</span>
@@ -778,7 +780,7 @@ export function WeddingInvitation() {
                   <p className="event-card-description">
                     Celebration with feast, music &amp; joy
                   </p>
-                </div>
+                </div> */}
 
                 <div className="event-card-btn-wrapper">
                   <Button
@@ -791,7 +793,7 @@ export function WeddingInvitation() {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      <MapPin className="mr-2 h-4 w-4" /> View Map
+                      <Navigation className="mr-2 h-4 w-4" /> View Route
                     </a>
                   </Button>
                 </div>

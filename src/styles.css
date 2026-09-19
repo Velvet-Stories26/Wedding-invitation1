@@ -1829,8 +1829,9 @@ a {
 }
 
 .event-reception .event-map-btn {
-  background: linear-gradient(180deg, #16365C 0%, #0A1B30 100%);
-  box-shadow: 0 4px 0 #050E1A, 0 8px 20px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  background: linear-gradient(180deg, #183C66 0%, #0A1C33 100%);
+  box-shadow: 0 5px 0 #040B14, 0 10px 24px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.16em;
 }
 
 .event-engagement .event-map-btn svg { color: #F5D082; width: 1.1rem; height: 1.1rem; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); }
@@ -1852,8 +1853,8 @@ a {
 
 .event-reception .event-map-btn:hover {
   transform: translateY(-2px);
-  background: linear-gradient(180deg, #1C4270 0%, #0E2440 100%) !important;
-  box-shadow: 0 6px 0 #050E1A, 0 12px 26px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  background: linear-gradient(180deg, #204C7E 0%, #0E2747 100%) !important;
+  box-shadow: 0 7px 0 #040B14, 0 14px 30px rgba(0, 0, 0, 0.75), inset 0 1px 1px rgba(255, 255, 255, 0.45);
 }
 
 /* 3D Active click press down state */
