@@ -412,6 +412,7 @@ export function WeddingInvitation() {
     }
 
     if (videoRef.current) {
+      videoRef.current.playbackRate = 0.85;
       videoRef.current.play().catch(() => {
         console.log("Video playback failed");
         setContentRevealed(true);
@@ -463,7 +464,22 @@ export function WeddingInvitation() {
             onClick={handleOpen}
             aria-label="Open the wedding invitation"
           >
-            <video ref={videoRef} src={startAnimeVideo} muted playsInline className="envelope-img" onEnded={() => setContentRevealed(true)} />
+            <video
+              ref={videoRef}
+              src={startAnimeVideo}
+              muted
+              playsInline
+              className="envelope-img"
+              onEnded={() => {
+                const screen = document.getElementById("invitation");
+                if (screen) {
+                  screen.classList.add("fade-out");
+                  setTimeout(() => setContentRevealed(true), 600);
+                } else {
+                  setContentRevealed(true);
+                }
+              }}
+            />
           </button>
           <p className="opening-hint">Click to open</p>
         </section>
