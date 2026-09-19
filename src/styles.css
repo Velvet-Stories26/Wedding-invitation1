@@ -1633,6 +1633,16 @@ a {
   content: none;
 }
 
+/* Reception card — always show the full image, no cropping on any screen size */
+.event-list article.event-card.event-reception {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-color: #0a1a0e;
+  min-height: unset;
+  aspect-ratio: 3 / 4;
+}
+
 /* Top-Right Event Number (Cinzel Font) */
 .event-card-number {
   position: absolute;
@@ -1866,6 +1876,13 @@ a {
     min-height: 27rem;
     padding: 22px 22px 18px 22px;
     border-radius: 10px;
+  }
+
+  /* Reception keeps its aspect-ratio layout on mobile — no fixed min-height */
+  .event-list article.event-card.event-reception {
+    min-height: unset;
+    aspect-ratio: 3 / 4;
+    padding: 18px 18px 16px;
   }
 
   .event-card-number {
