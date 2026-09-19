@@ -561,6 +561,7 @@ export function WeddingInvitation() {
               </div>
               <LeafSprigRight />
             </div>
+            <TornEdgeBottom color="#12381e" />
           </section>
           <section id="memories" className="slideshow-section">
             {gallery.map((image, index) => <img key={image.src} className={slide === index ? "active" : ""} src={image.src} alt={image.alt} width={1280} height={index === 0 ? 1536 : 912} loading="lazy" />)}
