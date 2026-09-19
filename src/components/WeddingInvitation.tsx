@@ -745,7 +745,6 @@ export function WeddingInvitation() {
               {/* Reception Card */}
               <article
                 className="event-card event-reception"
-                style={{ backgroundImage: `url(${receptionImage})` }}
                 data-reveal
                 onClick={() => window.open("https://maps.app.goo.gl/vwfTitZmioioe1EC8?g_st=aw", "_blank", "noopener,noreferrer")}
               >
@@ -756,31 +755,14 @@ export function WeddingInvitation() {
                   rel="noreferrer"
                   aria-label="Open Reception venue on Google Maps"
                 />
-                {/* <span className="event-card-number">03</span> */}
-                
-                {/* <div className="event-card-body">
-                  <div className="event-date-row">
-                    <CalendarDays className="event-date-icon" />
-                    <span className="event-date-label">WEDNESDAY · OCTOBER</span>
-                  </div>
-                  <div className="event-date-day">7</div>
-                  
-                  <h3 className="event-card-title">Reception</h3>
-                  
-                  <div className="event-card-divider">
-                    <span className="event-card-divider-line" />
-                    <span className="event-card-divider-diamond">❖</span>
-                    <span className="event-card-divider-line" />
-                  </div>
-                  
-                  <p className="event-card-time-venue">
-                    1:00 in the Afternoon · J.C. Community Hall, Siluvaipuram
-                  </p>
-                  
-                  <p className="event-card-description">
-                    Celebration with feast, music &amp; joy
-                  </p>
-                </div> */}
+
+                {/* Full image — no crop, no letterbox */}
+                <img
+                  src={receptionImage}
+                  alt="Reception venue"
+                  className="reception-full-img"
+                  loading="lazy"
+                />
 
                 <div className="event-card-btn-wrapper">
                   <Button

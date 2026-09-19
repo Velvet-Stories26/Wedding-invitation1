@@ -1633,14 +1633,35 @@ a {
   content: none;
 }
 
-/* Reception card — always show the full image, no cropping on any screen size */
+/* Reception card — real <img> fills the card, no background tricks */
 .event-list article.event-card.event-reception {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-color: #0a1a0e;
   min-height: unset;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: unset;
+  background: none !important;
+  background-image: none !important;
+  padding: 0;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+/* The image fills full width, height scales naturally — zero cropping, zero borders */
+.event-reception .reception-full-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Button floats over the bottom of the image */
+.event-reception .event-card-btn-wrapper {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  padding: 0 18px;
+  margin-top: 0;
+  padding-top: 0;
 }
 
 /* Top-Right Event Number (Cinzel Font) */
@@ -1878,11 +1899,10 @@ a {
     border-radius: 10px;
   }
 
-  /* Reception keeps its aspect-ratio layout on mobile — no fixed min-height */
+  /* Reception uses real img — no padding, no fixed height */
   .event-list article.event-card.event-reception {
     min-height: unset;
-    aspect-ratio: 3 / 4;
-    padding: 18px 18px 16px;
+    padding: 0;
   }
 
   .event-card-number {
