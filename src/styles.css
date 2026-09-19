@@ -766,7 +766,6 @@ a {
   padding: 6rem 1.4rem
 }
 
-.polaroid-section,
 .paper-section,
 .events-section,
 .letter-section,
@@ -776,10 +775,10 @@ a {
   text-align: center;
   background: #F2F5EE !important;
   box-shadow: inset 0 0 60px rgba(225, 235, 217, 0.35);
-  color: #ffffff;
+  color: #1b3a20;
 }
 
-/* date-reveal-section has its own bg image from inline style — must NOT be in the !important white group */
+/* date-reveal-section has its own bg image from inline style */
 .date-reveal-section {
   text-align: center;
   position: relative;
@@ -796,7 +795,6 @@ a {
   content: "";
   position: absolute;
   inset: 0;
-  /* Soft overlay so scratch-bg image is clearly visible while keeping text perfectly readable */
   background: rgba(245, 248, 242, 0.20);
   pointer-events: none;
   z-index: 1;
@@ -837,7 +835,6 @@ a {
 .paper-section h2,
 .date-reveal-section h2,
 .countdown-section h2,
-.polaroid-section h2,
 .events-section h2,
 .letter-section h2,
 .faq-section h2 {
@@ -851,13 +848,13 @@ a {
 .paper-section>div>.eyebrow,
 .date-reveal-section .eyebrow,
 .countdown-section>.eyebrow,
-.polaroid-section>div>.eyebrow,
 .events-section .eyebrow,
 .letter-section .eyebrow,
 .faq-section>div>.eyebrow {
   color: #3b5836;
   letter-spacing: 0.2em;
   font-weight: 600;
+  opacity: 1;
 }
 
 .section-intro {
@@ -1411,12 +1408,12 @@ a {
 }
 
 .gallery-section h2 {
-  color: #1b3a20;
+  color: #1b3a20 !important;
   text-shadow: none;
 }
 
 .gallery-section .eyebrow {
-  color: #3b5836;
+  color: #3b5836 !important;
   font-weight: 600;
 }
 
@@ -1462,21 +1459,27 @@ a {
   letter-spacing: .15em
 }
 
+/* EXCLUSIVE POLAROID MEMORIES SECTION IN SOLID DARK GREEN (#22442c) WITH WHITE TEXT */
 .polaroid-section {
   padding: 6rem 1.2rem;
   text-align: center;
-  background: #ffffff;
-  box-shadow: inset 0 0 60px rgba(225, 235, 217, 0.35);
+  background-color: #22442c !important;
+  background: #22442c !important;
+  box-shadow: none !important;
+  color: #ffffff !important;
+  opacity: 1 !important;
 }
 
 .polaroid-section h2 {
-  color: #1b3a20;
-  text-shadow: none;
+  color: #ffffff !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
 }
 
 .polaroid-section .eyebrow {
-  color: #3b5836;
+  color: #ffffff !important;
   font-weight: 600;
+  opacity: 1 !important;
 }
 
 .polaroids {
@@ -1902,20 +1905,23 @@ a {
 .letter-section {
   position: relative;
   min-height: auto;
-  padding: 0.1rem 1rem 0.1rem;
+  padding: 3.5rem 1rem 3.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: #F2F5EE !important;
-  color: #1b3a20;
+  background-color: #22442c !important;
+  background: #22442c !important;
+  box-shadow: none !important;
+  color: #ffffff !important;
   overflow: hidden;
   margin-bottom: 0;
+  opacity: 1 !important;
 }
 
 .letter-section.is-open {
-  padding: 0.1rem 1rem 0.1rem;
+  padding: 3.5rem 1rem 3.5rem;
 }
 
 .letter-header {
@@ -1925,18 +1931,20 @@ a {
 
 .letter-header .eyebrow {
   margin-bottom: 0.1rem;
-  color: #3b5836;
+  color: #ffffff !important;
   font-family: var(--font-serif);
   letter-spacing: 0.15em;
   text-transform: uppercase;
   font-size: 0.82rem;
+  opacity: 1 !important;
 }
 
 .letter-header h2 {
   font-family: var(--font-display);
   font-size: clamp(1.8rem, 4vw, 2.4rem);
-  color: #12381e;
+  color: #ffffff !important;
   margin: 0;
+  opacity: 1 !important;
 }
 
 /* WRAPPER — Grid stack overlay for fluid 3D letter transition */

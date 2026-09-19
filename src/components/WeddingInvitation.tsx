@@ -562,7 +562,7 @@ export function WeddingInvitation() {
           </section>
 
           <section className="countdown-section paper-section torn-section" data-reveal>
-            <TornEdgeTop color="#12381e" />
+            <TornEdgeTop color="#22442c" />
             <p className="eyebrow">TILL OUR BIG DAY</p>
             <h2>Countdown</h2>
             <div className="countdown-flanked-wrapper" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1.5rem', width: '100%' }}>
@@ -577,7 +577,7 @@ export function WeddingInvitation() {
               </div>
               <LeafSprigRight />
             </div>
-            <TornEdgeBottom color="#12381e" />
+            <TornEdgeBottom color="#22442c" />
           </section>
           <section id="memories" className="slideshow-section">
             {gallery.map((image, index) => <img key={image.src} className={slide === index ? "active" : ""} src={image.src} alt={image.alt} width={1280} height={index === 0 ? 1536 : 912} loading="lazy" />)}
@@ -604,8 +604,8 @@ export function WeddingInvitation() {
           </section> */}
 
           <section className="gallery-section paper-section torn-section">
-            <TornEdgeTop color="#12381e" />
-            <TornEdgeBottom color="#12381e" />
+            <TornEdgeTop color="#22442c" />
+            <TornEdgeBottom color="#22442c" />
             <div data-reveal><p className="eyebrow">Through our eyes</p><h2>A few favorite moments</h2></div>
             <div className="gallery-grid">
               {gallery.map((image, index) => <button key={image.src} className={image.ratio} onClick={() => setLightbox(index)} aria-label={`View ${image.alt} fullscreen`}><img src={image.src} alt={image.alt} width={1024} height={1280} loading="lazy" /><span>0{index + 1}</span></button>)}
@@ -613,8 +613,8 @@ export function WeddingInvitation() {
           </section>
 
           <section className="polaroid-section paper-section torn-section">
-            <TornEdgeTop color="#12381e" />
-            <TornEdgeBottom color="#12381e" />
+            <TornEdgeTop color="#22442c" />
+            <TornEdgeBottom color="#22442c" />
             <div data-reveal><p className="eyebrow">Little pieces of us</p><h2>Polaroid memories</h2></div>
             <div className="polaroids">
               {[walkImage, laughImage, ringsImage].map((src, index) => <figure key={src}><img src={src} alt={["A walk to remember", "The laugh we love", "A promise in gold"][index]} width={500} height={600} loading="lazy" /><figcaption>{["the long way home", "always laughing", "the promise"][index]}</figcaption></figure>)}
@@ -622,8 +622,8 @@ export function WeddingInvitation() {
           </section>
 
           <section id="events" className="events-section paper-section torn-section">
-            <TornEdgeTop color="#12381e" />
-            <TornEdgeBottom color="#12381e" />
+            <TornEdgeTop color="#22442c" />
+            <TornEdgeBottom color="#22442c" />
             <div data-reveal><p className="eyebrow">The celebrations</p><h2>Join us for</h2></div>
             <div className="event-list">
               {/* Engagement Card */}
@@ -799,7 +799,9 @@ export function WeddingInvitation() {
             </div>
           </section>
 
-          <section className={`letter-section ${letterOpen ? "is-open" : ""}`}>
+          <section className={`letter-section torn-section ${letterOpen ? "is-open" : ""}`}>
+            <TornEdgeTop color="#22442c" />
+            <TornEdgeBottom color="#22442c" />
             <div className="letter-header" data-reveal>
               <p className="eyebrow">A little note for you</p>
               <h2>Words From Our Hearts</h2>
