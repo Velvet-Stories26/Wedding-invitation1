@@ -1628,20 +1628,9 @@ a {
   transition: opacity 0.3s ease;
 }
 
-/* Event 3 — Reception Overlay */
+/* Event 3 — Reception: No overlay — image shows fully crisp */
 .event-list article.event-reception::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(
-    180deg,
-    rgba(4, 13, 31, 0.22) 0%,
-    rgba(4, 13, 31, 0.34) 28%,
-    rgba(4, 10, 22, 0.65) 60%,
-    rgba(2, 6, 14, 0.92) 100%
-  );
-  transition: opacity 0.3s ease;
+  content: none;
 }
 
 /* Top-Right Event Number (Cinzel Font) */
@@ -1828,15 +1817,23 @@ a {
   box-shadow: 0 4px 0 #07150C, 0 8px 20px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.3);
 }
 
+/* Reception — Forest Green Button */
 .event-reception .event-map-btn {
-  background: linear-gradient(180deg, #183C66 0%, #0A1C33 100%);
-  box-shadow: 0 5px 0 #040B14, 0 10px 24px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.35);
-  letter-spacing: 0.16em;
+  background: linear-gradient(180deg, #2e6640 0%, #1a3d26 100%);
+  box-shadow: 0 5px 0 #0d2015, 0 10px 24px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  font-family: "Cormorant Garamond", "Bodoni Moda", serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: none;
+  padding: 0 1.6rem;
+  min-height: 42px;
 }
 
 .event-engagement .event-map-btn svg { color: #F5D082; width: 1.1rem; height: 1.1rem; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); }
 .event-wedding .event-map-btn svg { color: #F5D082; width: 1.1rem; height: 1.1rem; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); }
-.event-reception .event-map-btn svg { color: #E8C77A; width: 1.1rem; height: 1.1rem; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); }
+.event-reception .event-map-btn svg { color: #a8e6bc; width: 1rem; height: 1rem; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); }
 
 /* 3D Hover elevation state */
 .event-engagement .event-map-btn:hover {
@@ -1853,8 +1850,8 @@ a {
 
 .event-reception .event-map-btn:hover {
   transform: translateY(-2px);
-  background: linear-gradient(180deg, #204C7E 0%, #0E2747 100%) !important;
-  box-shadow: 0 7px 0 #040B14, 0 14px 30px rgba(0, 0, 0, 0.75), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+  background: linear-gradient(180deg, #38794d 0%, #224f32 100%) !important;
+  box-shadow: 0 7px 0 #0d2015, 0 14px 30px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.35);
 }
 
 /* 3D Active click press down state */
