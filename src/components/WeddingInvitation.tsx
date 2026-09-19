@@ -803,31 +803,9 @@ export function WeddingInvitation() {
               </div>
 
               {/* Open envelope image */}
-              <div className="letter-open-img">
+              <div className="letter-open-img" onClick={() => setLetterOpen(false)} title="Click to close letter">
                 <img src={letterOpenImage} alt="Opened love letter with heartfelt message" width={1200} height={1200} />
               </div>
-
-              {/* Caption */}
-              <div className="letter-caption">
-                <span className="caption-line" />
-                <div className="caption-content">
-                  <span className="caption-icon">✦</span>
-                  <p>{letterOpen ? "A message held in our hearts" : "Tap the seal to open our letter"}</p>
-                </div>
-                <span className="caption-line" />
-              </div>
-
-              {/* Heartfelt message quote */}
-              {letterOpen && (
-                <div className="letter-quote-box" style={{ marginTop: '2rem', maxWidth: '32rem', textAlign: 'center', padding: '0 1rem' }}>
-                  <p style={{ fontStyle: 'italic', fontSize: '1.1rem', lineHeight: '1.7', color: '#1b3a20', fontFamily: 'var(--font-serif)', margin: '0 0 0.6rem' }}>
-                    “To our beloved family and friends — thank you for walking beside us, sharing in our joy, and filling our lives with so much love as we begin our forever.”
-                  </p>
-                  <span style={{ display: 'inline-block', fontSize: '0.82rem', color: '#3b5836', letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 600 }}>
-                    — Sujin &amp; Jeneesha —
-                  </span>
-                </div>
-              )}
             </div>
           </section>
 

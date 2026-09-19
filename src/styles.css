@@ -1861,7 +1861,7 @@ a {
 .letter-section {
   position: relative;
   min-height: auto;
-  padding: 2.5rem 1.2rem 2.5rem;
+  padding: 0.1rem 1rem 0.1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1871,69 +1871,55 @@ a {
   color: #1b3a20;
   overflow: hidden;
   margin-bottom: 0;
-  transition: padding 0.5s ease;
 }
 
 .letter-section.is-open {
-  padding: 3rem 1.2rem 3rem;
+  padding: 0.1rem 1rem 0.1rem;
 }
 
 .letter-header {
-  margin-bottom: 1rem;
+  margin-bottom: 0.1rem;
   z-index: 2;
-  transition: transform 0.5s ease;
 }
 
 .letter-header .eyebrow {
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.1rem;
   color: #3b5836;
   font-family: var(--font-serif);
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
 }
 
 .letter-header h2 {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 2.6rem);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
   color: #12381e;
   margin: 0;
-}
-
-.letter-section::before {
-  content: "";
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  top: -280px;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 1px solid rgba(18, 56, 30, 0.12);
-  pointer-events: none;
 }
 
 /* WRAPPER */
 .image-letter-wrapper {
   position: relative;
-  width: min(100%, 500px);
+  width: min(92vw, 440px);
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 0.2rem;
 }
 
 /* CLOSED ENVELOPE IMAGE */
 .letter-closed-img {
   position: relative;
-  width: min(90vw, 420px);
-  margin-top: 0.4rem;
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  width: 100%;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .letter-closed-img img {
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 12px 28px rgba(30, 50, 25, 0.14));
+  display: block;
+  filter: drop-shadow(0 8px 20px rgba(30, 50, 25, 0.12));
   transition: transform 0.3s ease;
 }
 
@@ -1985,20 +1971,19 @@ a {
 .letter-open-img {
   display: none;
   position: relative;
-  width: min(94vw, 470px);
-  margin-top: 0.4rem;
+  width: 100%;
   opacity: 0;
-  transform: translateY(12px) scale(0.97);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity 0.3s ease;
 }
 
 .letter-open-img img {
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 16px 36px rgba(30, 50, 25, 0.16));
+  display: block;
+  filter: drop-shadow(0 12px 28px rgba(30, 50, 25, 0.14));
 }
 
-/* === OPEN STATE === */
+/* === IN-PLACE SWAP OPEN STATE === */
 .image-letter-wrapper.is-open .letter-closed-img {
   display: none;
   opacity: 0;
@@ -2007,144 +1992,25 @@ a {
 .image-letter-wrapper.is-open .letter-open-img {
   display: block;
   opacity: 1;
-  transform: translateY(0) scale(1);
-  animation: letter-reveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: letter-swap 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes letter-reveal {
+@keyframes letter-swap {
   0% {
     opacity: 0;
-    transform: translateY(14px) scale(0.96);
+    transform: scale(0.97);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* CAPTION */
-.letter-caption {
-  width: min(90vw, 420px);
-  margin-top: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.8rem;
-  transition: margin-top 0.4s ease;
-}
-
-.caption-line {
-  width: 38px;
-  height: 1px;
-  flex-shrink: 0;
-  background: #3b5836;
-  opacity: 0.5;
-}
-
-.caption-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.caption-icon {
-  font-size: 0.9rem;
-  color: #3b5836;
-  animation: gentle-bounce 2s ease-in-out infinite;
-}
-
-.letter-caption p {
-  margin: 0;
-  font-family: var(--font-serif);
-  font-size: 0.92rem;
-  font-style: italic;
-  letter-spacing: 0.04em;
-  color: #1b3a20;
-  font-weight: 600;
-}
-
-@keyframes gentle-bounce {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-3px);
+    transform: scale(1);
   }
 }
 
 @media (max-width: 600px) {
   .letter-section {
     min-height: auto;
-    padding: 2rem 1rem 2rem;
+    padding: 0.6rem 0.8rem;
   }
-
-  .letter-closed-img,
-  .letter-open-img {
-    width: min(95vw, 360px);
-  }
-
-  .letter-caption {
-    margin-top: 2.5rem;
-    gap: 0.5rem;
-  }
-
-  .caption-line {
-    width: 22px;
-  }
-
-  .letter-caption p {
-    font-size: 0.72rem;
-  }
-}
-
-
-/* =====================================================
-   SOFT DECORATION
-===================================================== */
-
-.letter-section::before {
-  content: "";
-
-  position: absolute;
-
-  width: 500px;
-  height: 500px;
-
-  border-radius: 50%;
-
-  top: -280px;
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  border: 1px solid color-mix(in oklab,
-      var(--primary) 12%,
-      transparent);
-
-  pointer-events: none;
-}
-
-
-.letter-section::after {
-  content: "✦";
-
-  position: absolute;
-
-  bottom: 8%;
-
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  font-size: 1rem;
-
-  color: var(--primary);
-
-  opacity: 0.35;
 }
 
 
