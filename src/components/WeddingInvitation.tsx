@@ -25,13 +25,11 @@ import invitationBg from "@/assets/invitaion-bg.png";
 import invLetterBg from "@/assets/inv-letter.png";
 import engagementImage from "@/assets/engagement.png";
 import weddingImage from "@/assets/wedding.png";
-import receptionImage from "@/assets/invitaion1-bg.png";
+import receptionImage from "@/assets/reception.png";
 import dayImg from "@/assets/day.png";
 import monthImg from "@/assets/month.png";
 import yearImg from "@/assets/year.png";
-import countdownBg from "@/assets/countdown-bg.png";
-import topTornEdge from "@/assets/top-torn-svg.svg";
-import bottomTornEdge from "@/assets/bottom-torn-svg.svg";
+import scratchBg from "@/assets/scratch-bg.png";
 import letterClosedImage from "@/assets/letter.png";
 import letterOpenImage from "@/assets/letter-open.png";
 import musicFile from "@/assets/music.mp3";
@@ -204,20 +202,40 @@ function ScratchBox({ label, value, coverImage, onReveal }: { label: string; val
 
 function LeafSprigLeft() {
   return (
-    <svg className="botanical-leaf-svg left-leaf" width="36" height="54" viewBox="0 0 36 54" fill="none" aria-hidden="true">
-      <path d="M18 48C18 48 24 32 34 24C34 24 22 26 18 34C14 26 2 24 2 24C12 32 18 48 18 48Z" fill="#A7C4A0" />
-      <path d="M18 50C18 50 26 18 34 8C34 8 22 14 18 26C14 14 2 8 2 8C10 18 18 50 18 50Z" stroke="#1B4332" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M18 52V2" stroke="#D4AF37" strokeWidth="1.2" strokeLinecap="round" />
+    <svg className="botanical-leaf-svg left-leaf" width="36" height="54" viewBox="0 0 36 54" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M18 52C18 52 14 38 6 28C1 21.5 2 12 10 14C12.5 14.6 15 17 18 20" stroke="#12381e" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M18 42C18 42 24 32 30 24C34 18.5 32 10 24 12C21.5 12.6 19.5 15 18 18" stroke="#12381e" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M18 28C18 28 12 18 8 10C5.5 5 9 1.5 14 3.5C16 4.3 17 6.5 18 9" stroke="#12381e" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M18 20C18 20 22 12 26 6C28.5 2.2 25.5-0.5 21 1C19.5 1.5 18.5 3.5 18 5.5" stroke="#12381e" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M18 52V2" stroke="#12381e" strokeWidth="1.2" strokeLinecap="round" />
     </svg>
   );
 }
 
 function LeafSprigRight() {
   return (
-    <svg className="botanical-leaf-svg right-leaf" width="36" height="54" viewBox="0 0 36 54" fill="none" aria-hidden="true" style={{ transform: 'scaleX(-1)' }}>
-      <path d="M18 48C18 48 24 32 34 24C34 24 22 26 18 34C14 26 2 24 2 24C12 32 18 48 18 48Z" fill="#A7C4A0" />
-      <path d="M18 50C18 50 26 18 34 8C34 8 22 14 18 26C14 14 2 8 2 8C10 18 18 50 18 50Z" stroke="#1B4332" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M18 52V2" stroke="#D4AF37" strokeWidth="1.2" strokeLinecap="round" />
+    <svg className="botanical-leaf-svg right-leaf" width="36" height="54" viewBox="0 0 36 54" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style={{ transform: "scaleX(-1)" }}>
+      <path d="M18 52C18 52 14 38 6 28C1 21.5 2 12 10 14C12.5 14.6 15 17 18 20" stroke="#12381e" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M18 42C18 42 24 32 30 24C34 18.5 32 10 24 12C21.5 12.6 19.5 15 18 18" stroke="#12381e" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M18 28C18 28 12 18 8 10C5.5 5 9 1.5 14 3.5C16 4.3 17 6.5 18 9" stroke="#12381e" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M18 20C18 20 22 12 26 6C28.5 2.2 25.5-0.5 21 1C19.5 1.5 18.5 3.5 18 5.5" stroke="#12381e" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M18 52V2" stroke="#12381e" strokeWidth="1.2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function TornEdgeTop({ color = "#12381e" }: { color?: string }) {
+  return (
+    <svg className="torn-edge torn-edge-top" width="1200" height="120" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 0h1200v40c-55 12-115 45-180 15-65-30-125 15-190 25-65 10-135-25-190-10-55 15-110 35-180 5-70-30-130 15-190 20-60 5-115-30-170-15C45 95 20 65 0 75Z" fill={color} />
+    </svg>
+  );
+}
+
+function TornEdgeBottom({ color = "#12381e" }: { color?: string }) {
+  return (
+    <svg className="torn-edge torn-edge-bottom" width="1200" height="120" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true" style={{ transform: "rotate(180deg)" }}>
+      <path d="M0 0h1200v40c-55 12-115 45-180 15-65-30-125 15-190 25-65 10-135-25-190-10-55 15-110 35-180 5-70-30-130 15-190 20-60 5-115-30-170-15C45 95 20 65 0 75Z" fill={color} />
     </svg>
   );
 }
@@ -226,7 +244,7 @@ function FloralMark() {
   return (
     <div className="floral-mark" aria-hidden="true">
       <span />
-      <Heart size={14} fill="#D4AF37" color="#D4AF37" />
+      <Heart size={14} fill="#12381e" color="#12381e" />
       <span />
     </div>
   );
@@ -457,7 +475,7 @@ export function WeddingInvitation() {
             <video src={weddingAnimation} autoPlay loop muted playsInline className="hero-video-bg" />
             <div className="hero-shade" />
             <div className="hero-copy" data-reveal>
-              <p className="hero-subheading">WE ARE <br></br>GETTING MARRIED</p>
+              <p className="hero-subheading">WE ARE GETTING MARRIED</p>
               <h1 className="hero-names">
                 <span className="script-title">Sujin</span>
                 <span className="hero-amp">&amp;</span>
@@ -476,9 +494,7 @@ export function WeddingInvitation() {
             </div>
           </section>
 
-          <section className="paper-section date-reveal-section torn-section" data-reveal style={{ backgroundImage: `url(${countdownBg})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
-            <img className="torn-edge torn-edge-top" src={topTornEdge} alt="" aria-hidden="true" />
-            <img className="torn-edge torn-edge-bottom" src={bottomTornEdge} alt="" aria-hidden="true" />
+          <section className="date-reveal-section" data-reveal style={{ backgroundImage: `url(${scratchBg})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
             <p className="eyebrow">Save our date</p>
             <h2>A perfect day awaits</h2>
             <p className="section-intro">Gently scratch each olive panel to reveal when our forever begins.</p>
@@ -529,9 +545,8 @@ export function WeddingInvitation() {
             </div>
           </section>
 
-          <section className="countdown-section torn-section" data-reveal style={{ backgroundImage: `url(${countdownBg})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
-            <img className="torn-edge torn-edge-top" src={topTornEdge} alt="" aria-hidden="true" />
-            <img className="torn-edge torn-edge-bottom" src={bottomTornEdge} alt="" aria-hidden="true" />
+          <section className="countdown-section paper-section torn-section" data-reveal>
+            <TornEdgeTop color="#12381e" />
             <p className="eyebrow">TILL OUR BIG DAY</p>
             <h2>Countdown</h2>
             <div className="countdown-flanked-wrapper" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1.5rem', width: '100%' }}>
@@ -572,8 +587,8 @@ export function WeddingInvitation() {
           </section> */}
 
           <section className="gallery-section paper-section torn-section">
-            <img className="torn-edge torn-edge-top" src={topTornEdge} alt="" aria-hidden="true" />
-            <img className="torn-edge torn-edge-bottom" src={bottomTornEdge} alt="" aria-hidden="true" />
+            <TornEdgeTop color="#12381e" />
+            <TornEdgeBottom color="#12381e" />
             <div data-reveal><p className="eyebrow">Through our eyes</p><h2>A few favorite moments</h2></div>
             <div className="gallery-grid">
               {gallery.map((image, index) => <button key={image.src} className={image.ratio} onClick={() => setLightbox(index)} aria-label={`View ${image.alt} fullscreen`}><img src={image.src} alt={image.alt} width={1024} height={1280} loading="lazy" /><span>0{index + 1}</span></button>)}
@@ -581,8 +596,8 @@ export function WeddingInvitation() {
           </section>
 
           <section className="polaroid-section paper-section torn-section">
-            <img className="torn-edge torn-edge-top" src={topTornEdge} alt="" aria-hidden="true" />
-            <img className="torn-edge torn-edge-bottom" src={bottomTornEdge} alt="" aria-hidden="true" />
+            <TornEdgeTop color="#12381e" />
+            <TornEdgeBottom color="#12381e" />
             <div data-reveal><p className="eyebrow">Little pieces of us</p><h2>Polaroid memories</h2></div>
             <div className="polaroids">
               {[walkImage, laughImage, ringsImage].map((src, index) => <figure key={src}><img src={src} alt={["A walk to remember", "The laugh we love", "A promise in gold"][index]} width={500} height={600} loading="lazy" /><figcaption>{["the long way home", "always laughing", "the promise"][index]}</figcaption></figure>)}
@@ -590,87 +605,184 @@ export function WeddingInvitation() {
           </section>
 
           <section id="events" className="events-section paper-section torn-section">
-            <img className="torn-edge torn-edge-top" src={topTornEdge} alt="" aria-hidden="true" />
-            <img className="torn-edge torn-edge-bottom" src={bottomTornEdge} alt="" aria-hidden="true" />
+            <TornEdgeTop color="#12381e" />
+            <TornEdgeBottom color="#12381e" />
             <div data-reveal><p className="eyebrow">The celebrations</p><h2>Join us for</h2></div>
             <div className="event-list">
               {/* Engagement Card */}
-              <article className="event-card event-engagement" style={{ backgroundImage: `url(${engagementImage})` }} data-reveal>
+              <article
+                className="event-card event-engagement"
+                style={{ backgroundImage: `url(${engagementImage})` }}
+                data-reveal
+                onClick={() => window.open("https://www.google.com/maps/search/?api=1&query=Christ+the+King+Parish+Hall+Paruthiyoor+Pozhiyoor", "_blank", "noopener,noreferrer")}
+              >
+                <a
+                  className="event-card-link"
+                  href="https://www.google.com/maps/search/?api=1&query=Christ+the+King+Parish+Hall+Paruthiyoor+Pozhiyoor"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Open Engagement venue on Google Maps"
+                />
+                <span className="event-card-number">01</span>
+                
+                <div className="event-card-body">
+                  <div className="event-date-row">
+                    <CalendarDays className="event-date-icon" />
+                    <span className="event-date-label">MONDAY · OCTOBER</span>
+                  </div>
+                  <div className="event-date-day">5</div>
+                  
+                  <h3 className="event-card-title">Engagement</h3>
+                  
+                  <div className="event-card-divider">
+                    <span className="event-card-divider-line" />
+                    <span className="event-card-divider-diamond">❖</span>
+                    <span className="event-card-divider-line" />
+                  </div>
+                  
+                  <p className="event-card-time-venue">
+                    3:00 in the Evening · Christ the King Community Hall, Paruthiyoor, Pozhiyoor
+                  </p>
+                  
+                  <p className="event-card-description">
+                    An evening of blessings, laughter &amp; celebration
+                  </p>
+                </div>
+
+                <div className="event-card-btn-wrapper">
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="event-map-btn"
+                  >
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=Christ+the+King+Parish+Hall+Paruthiyoor+Pozhiyoor"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <MapPin className="mr-2 h-4 w-4" /> View Map
+                    </a>
+                  </Button>
+                </div>
+              </article>
+
+              {/* Wedding Card */}
+              <article
+                className="event-card event-wedding"
+                style={{ backgroundImage: `url(${weddingImage})` }}
+                data-reveal
+                onClick={() => window.open("https://www.google.com/maps/search/?api=1&query=St.+John+of+the+Cross+Church+Siluvaipuram", "_blank", "noopener,noreferrer")}
+              >
+                <a
+                  className="event-card-link"
+                  href="https://www.google.com/maps/search/?api=1&query=St.+John+of+the+Cross+Church+Siluvaipuram"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Open Wedding venue on Google Maps"
+                />
+                <span className="event-card-number">02</span>
+                
+                <div className="event-card-body">
+                  <div className="event-date-row">
+                    <CalendarDays className="event-date-icon" />
+                    <span className="event-date-label">WEDNESDAY · OCTOBER</span>
+                  </div>
+                  <div className="event-date-day">7</div>
+                  
+                  <h3 className="event-card-title">Wedding</h3>
+                  
+                  <div className="event-card-divider">
+                    <span className="event-card-divider-line" />
+                    <span className="event-card-divider-diamond">❖</span>
+                    <span className="event-card-divider-line" />
+                  </div>
+                  
+                  <p className="event-card-time-venue">
+                    11:00 in the Morning · St. John of the Cross Church, Siluvaipuram
+                  </p>
+                  
+                  <p className="event-card-description">
+                    Sacred ceremony &amp; solemn vows
+                  </p>
+                </div>
+
+                <div className="event-card-btn-wrapper">
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="event-map-btn"
+                  >
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=St.+John+of+the+Cross+Church+Siluvaipuram"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <MapPin className="mr-2 h-4 w-4" /> View Map
+                    </a>
+                  </Button>
+                </div>
+              </article>
+
+              {/* Reception Card */}
+              <article
+                className="event-card event-reception"
+                style={{ backgroundImage: `url(${receptionImage})` }}
+                data-reveal
+                onClick={() => window.open("https://maps.app.goo.gl/vwfTitZmioioe1EC8?g_st=aw", "_blank", "noopener,noreferrer")}
+              >
                 <a
                   className="event-card-link"
                   href="https://maps.app.goo.gl/vwfTitZmioioe1EC8?g_st=aw"
                   target="_blank"
                   rel="noreferrer"
-                  aria-label="Open Engagement venue on Google Maps"
-                />
-                <span>01</span>
-                <div className="event-card-body">
-                  <Heart />
-                  <p>Tuesday · October 13</p>
-                  <h3>Engagement</h3>
-                  <p>3:00 in the evening · J.C. Community Hall, Siluvaipuram</p>
-                  <small>An evening of blessings, laughter &amp; celebration</small>
-                  <div className="mt-5">
-                    <Button asChild variant="outline" className="bg-transparent border-white/40 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm event-map-btn">
-                      <a href="https://maps.app.goo.gl/vwfTitZmioioe1EC8?g_st=aw" target="_blank" rel="noreferrer"><MapPin className="mr-2 h-4 w-4" /> View Map</a>
-                    </Button>
-                  </div>
-                </div>
-              </article>
-
-              {/* Wedding Card */}
-              <article className="event-card event-wedding" style={{ backgroundImage: `url(${weddingImage})` }} data-reveal>
-                <a
-                  className="event-card-link"
-                  href="https://maps.app.goo.gl/yDX9gXNNEFK3rAhq7?g_st=aw"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Open Wedding venue on Google Maps"
-                />
-                <span>02</span>
-                <div className="event-card-body">
-                  <CalendarDays />
-                  <p>Wednesday · October 7</p>
-                  <h3>Wedding</h3>
-                  <p>11:00 in the morning · St.Mary's Church, Vallavilai</p>
-                  <small></small>
-                  <div className="mt-5">
-                    <Button asChild variant="outline" className="bg-transparent border-white/40 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm event-map-btn">
-                      <a href="https://maps.app.goo.gl/yDX9gXNNEFK3rAhq7?g_st=aw" target="_blank" rel="noreferrer"><MapPin className="mr-2 h-4 w-4" /> View Map</a>
-                    </Button>
-                  </div>
-                </div>
-              </article>
-
-              {/* Reception Card */}
-              <article className="event-card event-reception" style={{ backgroundImage: `url(${receptionImage})` }} data-reveal>
-                <a
-                  className="event-card-link"
-                  href="https://maps.app.goo.gl/hgjhZnmWVZ2ZWevT6?g_st=aw"
-                  target="_blank"
-                  rel="noreferrer"
                   aria-label="Open Reception venue on Google Maps"
                 />
-                <span>03</span>
+                <span className="event-card-number">03</span>
+                
                 <div className="event-card-body">
-                  <CalendarDays />
-                  <p>Wednesday · October 7</p>
-                  <h3>Reception</h3>
-                  <p>1:00 in the Afternoon · St.Mary's Community Hall, Vallavilai</p>
-                  <small>Celebration with cocktails, dinner &amp; dancing · Formal Indian attire</small>
-                  <div className="mt-5">
-                    <Button asChild variant="outline" className="bg-transparent border-white/40 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm event-map-btn">
-                      <a href="https://maps.app.goo.gl/hgjhZnmWVZ2ZWevT6?g_st=aw" target="_blank" rel="noreferrer"><MapPin className="mr-2 h-4 w-4" /> View Map</a>
-                    </Button>
+                  <div className="event-date-row">
+                    <CalendarDays className="event-date-icon" />
+                    <span className="event-date-label">WEDNESDAY · OCTOBER</span>
                   </div>
+                  <div className="event-date-day">7</div>
+                  
+                  <h3 className="event-card-title">Reception</h3>
+                  
+                  <div className="event-card-divider">
+                    <span className="event-card-divider-line" />
+                    <span className="event-card-divider-diamond">❖</span>
+                    <span className="event-card-divider-line" />
+                  </div>
+                  
+                  <p className="event-card-time-venue">
+                    1:00 in the Afternoon · J.C. Community Hall, Siluvaipuram
+                  </p>
+                  
+                  <p className="event-card-description">
+                    Celebration with feast, music &amp; joy
+                  </p>
+                </div>
+
+                <div className="event-card-btn-wrapper">
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="event-map-btn"
+                  >
+                    <a
+                      href="https://maps.app.goo.gl/vwfTitZmioioe1EC8?g_st=aw"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <MapPin className="mr-2 h-4 w-4" /> View Map
+                    </a>
+                  </Button>
                 </div>
               </article>
             </div>
           </section>
 
-          <section className={`letter-section ${letterOpen ? "is-open" : ""} torn-section`}>
-            <img className="torn-edge torn-edge-top" src={topTornEdge} alt="" aria-hidden="true" />
-            <img className="torn-edge torn-edge-bottom" src={bottomTornEdge} alt="" aria-hidden="true" />
+          <section className={`letter-section ${letterOpen ? "is-open" : ""}`}>
             <div className="letter-header" data-reveal>
               <p className="eyebrow">A little note for you</p>
               <h2>Words From Our Hearts</h2>
@@ -737,9 +849,9 @@ export function WeddingInvitation() {
           </section> */}
 
           <section className="final-section">
-            <img src={laughImage} alt="Subin and Siluvaidhasi laughing together at dusk" width={1280} height={912} loading="lazy" />
+            <img src={laughImage} alt="Sujin and Jineesha James laughing together at dusk" width={1280} height={912} loading="lazy" />
             <div className="final-shade" />
-            <div data-reveal><Sparkles /><p className="eyebrow">With you, always</p><h2>And So Our<br /><em>Forever Begins...</em></h2><p>07 · 10 · 2026</p><span>Subin &amp; Siluvaidhasi</span></div>
+            <div data-reveal><Sparkles /><p className="eyebrow">With you, always</p><h2>And So Our<br /><em>Forever Begins...</em></h2><p>07 · 10 · 2026</p><span>Sujin &amp; Jineesha James</span></div>
 
           </section>
 
