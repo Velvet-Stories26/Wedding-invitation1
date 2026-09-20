@@ -69,12 +69,13 @@ function useCountdown() {
 function ScratchBox({ label, value, coverImage, onReveal }: { label: string; value: string; coverImage?: string; onReveal: () => void }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const hasRevealed = useRef(false);
+  const hasUserScratched = useRef(false);
 
   useEffect(() => {
     const initCanvas = () => {
       const canvas = canvasRef.current;
       if (!canvas) return;
-      const ctx = canvas.getContext("2d");
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
       if (!ctx) return;
       const ratio = window.devicePixelRatio || 1;
       const rect = canvas.getBoundingClientRect();
@@ -84,21 +85,56 @@ function ScratchBox({ label, value, coverImage, onReveal }: { label: string; val
       canvas.height = Math.floor(rect.height * ratio);
       ctx.scale(ratio, ratio);
 
+      // ALWAYS render the rich olive green gradient shade immediately
+      // This guarantees the real values are 100% hidden even before images finish loading
+      const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
+      gradient.addColorStop(0, "#233d25");
+      gradient.addColorStop(0.5, "#172b18");
+      gradient.addColorStop(1, "#0d1b0f");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, rect.width, rect.height);
+
+      // Subtle gold inner border
+      ctx.strokeStyle = "rgba(226, 211, 180, 0.4)";
+      ctx.lineWidth = 1;
+      ctx.strokeRect(6, 6, rect.width - 12, rect.height - 12);
+
+      // Decorative sparkle
+      ctx.fillStyle = "#dfc89f";
+      ctx.font = "14px serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("✦", rect.width / 2, rect.height / 2 - 16);
+
+      // Cover title in elegant font
+      ctx.fillStyle = "#fdfbf7";
+      ctx.font = "500 15px 'Italiana', 'Cormorant Garamond', serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      const text = label.toUpperCase();
+      if (typeof (ctx as any).letterSpacing !== "undefined") {
+        (ctx as any).letterSpacing = "3px";
+        ctx.fillText(text, rect.width / 2, rect.height / 2 + 7);
+      } else {
+        ctx.fillText(text, rect.width / 2, rect.height / 2 + 7);
+      }
+
+      // If coverImage is provided, draw it once loaded (or immediately if already cached)
       if (coverImage) {
         const img = new Image();
-        img.onload = () => {
-          // object-fit: cover — fill the entire square, crop excess, centred
+        const drawCover = () => {
+          // If the user already started scratching, do NOT overwrite their scratch marks
+          if (hasUserScratched.current) return;
+
           const imgRatio = img.width / img.height;
           const canvasRatio = rect.width / rect.height;
           let drawWidth: number;
           let drawHeight: number;
 
           if (imgRatio > canvasRatio) {
-            // image is wider — fit by height, crop sides
             drawHeight = rect.height;
             drawWidth = rect.height * imgRatio;
           } else {
-            // image is taller — fit by width, crop top/bottom
             drawWidth = rect.width;
             drawHeight = rect.width / imgRatio;
           }
@@ -108,27 +144,11 @@ function ScratchBox({ label, value, coverImage, onReveal }: { label: string; val
 
           ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
         };
-        img.src = coverImage;
-      } else {
-        // Fallback elegant olive green gradient cover
-        const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
-        gradient.addColorStop(0, "#4a6344");
-        gradient.addColorStop(0.5, "#2d4427");
-        gradient.addColorStop(1, "#152411");
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, rect.width + 10, rect.height + 10);
 
-        // Cover title in elegant font
-        ctx.fillStyle = "#fdfbf7";
-        ctx.font = "400 18px 'Italiana', 'Cormorant Garamond', serif";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        const text = label.toUpperCase();
-        if (typeof (ctx as any).letterSpacing !== "undefined") {
-          (ctx as any).letterSpacing = "3px";
-          ctx.fillText(text, rect.width / 2, rect.height / 2 - 2);
-        } else {
-          ctx.fillText(text, rect.width / 2, rect.height / 2 - 2);
+        img.onload = drawCover;
+        img.src = coverImage;
+        if (img.complete && img.naturalWidth > 0) {
+          drawCover();
         }
       }
     };
@@ -139,9 +159,10 @@ function ScratchBox({ label, value, coverImage, onReveal }: { label: string; val
   }, [label, coverImage]);
 
   const scratch = (clientX: number, clientY: number) => {
+    hasUserScratched.current = true;
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
     if (!ctx) return;
     const rect = canvas.getBoundingClientRect();
     const ratio = window.devicePixelRatio || 1;
@@ -282,6 +303,10 @@ export function WeddingInvitation() {
 
   useEffect(() => {
     setMounted(true);
+    [dayImg, monthImg, yearImg].forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
   }, []);
 
   useEffect(() => {
