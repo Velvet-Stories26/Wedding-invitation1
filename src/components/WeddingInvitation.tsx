@@ -631,7 +631,6 @@ export function WeddingInvitation() {
               {/* Engagement Card */}
               <article
                 className="event-card event-engagement"
-                style={{ backgroundImage: `url(${engagementImage})` }}
                 data-reveal
                 onClick={() => window.open("https://www.google.com/maps/search/?api=1&query=Christ+the+King+Parish+Hall+Paruthiyoor+Pozhiyoor", "_blank", "noopener,noreferrer")}
               >
@@ -642,31 +641,14 @@ export function WeddingInvitation() {
                   rel="noreferrer"
                   aria-label="Open Engagement venue on Google Maps"
                 />
-                <span className="event-card-number">01</span>
-                
-                <div className="event-card-body">
-                  <div className="event-date-row">
-                    <CalendarDays className="event-date-icon" />
-                    <span className="event-date-label">MONDAY · OCTOBER</span>
-                  </div>
-                  <div className="event-date-day">5</div>
-                  
-                  <h3 className="event-card-title">Engagement</h3>
-                  
-                  <div className="event-card-divider">
-                    <span className="event-card-divider-line" />
-                    <span className="event-card-divider-diamond">❖</span>
-                    <span className="event-card-divider-line" />
-                  </div>
-                  
-                  <p className="event-card-time-venue">
-                    3:00 in the Evening · Christ the King Community Hall, Paruthiyoor, Pozhiyoor
-                  </p>
-                  
-                  <p className="event-card-description">
-                    An evening of blessings, laughter &amp; celebration
-                  </p>
-                </div>
+
+                {/* Full image — no crop, no letterbox */}
+                <img
+                  src={engagementImage}
+                  alt="Engagement venue"
+                  className="reception-full-img"
+                  loading="lazy"
+                />
 
                 <div className="event-card-btn-wrapper">
                   <Button
@@ -679,7 +661,7 @@ export function WeddingInvitation() {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      <MapPin className="mr-2 h-4 w-4" /> View Map
+                      <Navigation className="mr-2 h-4 w-4" /> View Route
                     </a>
                   </Button>
                 </div>
@@ -688,7 +670,6 @@ export function WeddingInvitation() {
               {/* Wedding Card */}
               <article
                 className="event-card event-wedding"
-                style={{ backgroundImage: `url(${weddingImage})` }}
                 data-reveal
                 onClick={() => window.open("https://www.google.com/maps/search/?api=1&query=St.+John+of+the+Cross+Church+Siluvaipuram", "_blank", "noopener,noreferrer")}
               >
@@ -699,31 +680,14 @@ export function WeddingInvitation() {
                   rel="noreferrer"
                   aria-label="Open Wedding venue on Google Maps"
                 />
-                <span className="event-card-number">02</span>
-                
-                <div className="event-card-body">
-                  <div className="event-date-row">
-                    <CalendarDays className="event-date-icon" />
-                    <span className="event-date-label">WEDNESDAY · OCTOBER</span>
-                  </div>
-                  <div className="event-date-day">7</div>
-                  
-                  <h3 className="event-card-title">Wedding</h3>
-                  
-                  <div className="event-card-divider">
-                    <span className="event-card-divider-line" />
-                    <span className="event-card-divider-diamond">❖</span>
-                    <span className="event-card-divider-line" />
-                  </div>
-                  
-                  <p className="event-card-time-venue">
-                    11:00 in the Morning · St. John of the Cross Church, Siluvaipuram
-                  </p>
-                  
-                  <p className="event-card-description">
-                    Sacred ceremony &amp; solemn vows
-                  </p>
-                </div>
+
+                {/* Full image — no crop, no letterbox */}
+                <img
+                  src={weddingImage}
+                  alt="Wedding venue"
+                  className="reception-full-img"
+                  loading="lazy"
+                />
 
                 <div className="event-card-btn-wrapper">
                   <Button
@@ -736,7 +700,7 @@ export function WeddingInvitation() {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      <MapPin className="mr-2 h-4 w-4" /> View Map
+                      <Navigation className="mr-2 h-4 w-4" /> View Route
                     </a>
                   </Button>
                 </div>

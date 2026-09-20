@@ -1594,38 +1594,14 @@ a {
     0 6px 14px 0 rgba(0, 0, 0, 0.35);
 }
 
-/* ── OVERLAYS PER EVENT ── */
-
-/* Event 1 — Engagement Overlay */
+/* Event 1 — Engagement: No overlay — image shows fully crisp */
 .event-list article.event-engagement::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(
-    180deg,
-    rgba(27, 15, 25, 0.22) 0%,
-    rgba(27, 15, 25, 0.38) 35%,
-    rgba(16, 10, 18, 0.72) 68%,
-    rgba(5, 7, 13, 0.92) 100%
-  );
-  transition: opacity 0.3s ease;
+  content: none;
 }
 
-/* Event 2 — Wedding Overlay */
+/* Event 2 — Wedding: No overlay — image shows fully crisp */
 .event-list article.event-wedding::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(
-    180deg,
-    rgba(4, 15, 35, 0.22) 0%,
-    rgba(4, 15, 35, 0.34) 30%,
-    rgba(4, 10, 24, 0.70) 65%,
-    rgba(2, 6, 15, 0.93) 100%
-  );
-  transition: opacity 0.3s ease;
+  content: none;
 }
 
 /* Event 3 — Reception: No overlay — image shows fully crisp */
@@ -1633,7 +1609,9 @@ a {
   content: none;
 }
 
-/* Reception card — real <img> fills the card, no background tricks */
+/* All three event cards — real <img> fills the card, no background tricks */
+.event-list article.event-card.event-engagement,
+.event-list article.event-card.event-wedding,
 .event-list article.event-card.event-reception {
   min-height: unset;
   aspect-ratio: unset;
@@ -1653,16 +1631,6 @@ a {
   border-radius: 10px;
 }
 
-/* Button floats over the bottom of the image */
-.event-reception .event-card-btn-wrapper {
-  position: absolute;
-  bottom: 16px;
-  left: 0;
-  right: 0;
-  padding: 0 18px;
-  margin-top: 0;
-  padding-top: 0;
-}
 
 /* Top-Right Event Number (Cinzel Font) */
 .event-card-number {
@@ -1807,14 +1775,16 @@ a {
 
 /* ── REDESIGNED VIEW MAP BUTTON — 3D TACTILE LUXURY BUTTON (NO GOLD BORDER) ── */
 .event-card-btn-wrapper {
-  position: relative;
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  right: 0;
   z-index: 4;
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: auto;
-  padding-top: 0.8rem;
-  padding-bottom: 2px;
+  padding: 0 18px;
+  margin-top: 0;
 }
 
 .event-card .event-map-btn {
@@ -1837,55 +1807,36 @@ a {
   user-select: none;
 }
 
-/* 3D Color gradients & Bevel shadows per event */
-.event-engagement .event-map-btn {
-  background: linear-gradient(180deg, #4A2432 0%, #29121B 100%);
-  box-shadow: 0 4px 0 #180A10, 0 8px 20px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.3);
-}
-
-.event-wedding .event-map-btn {
-  background: linear-gradient(180deg, #1E462B 0%, #0E2617 100%);
-  box-shadow: 0 4px 0 #07150C, 0 8px 20px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.3);
-}
-
-/* Reception — Forest Green Button */
+/* All 3 cards — unified Forest Green reception-style button */
+.event-engagement .event-map-btn,
+.event-wedding .event-map-btn,
 .event-reception .event-map-btn {
   background: linear-gradient(180deg, #2e6640 0%, #1a3d26 100%);
   box-shadow: 0 5px 0 #0d2015, 0 10px 24px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.25);
   font-family: "Cormorant Garamond", "Bodoni Moda", serif;
   font-style: italic;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: none;
-  padding: 0 1.6rem;
-  min-height: 42px;
+  padding: 0 1.4rem;
+  min-height: 38px;
 }
 
-.event-engagement .event-map-btn svg { color: #F5D082; width: 1.1rem; height: 1.1rem; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); }
-.event-wedding .event-map-btn svg { color: #F5D082; width: 1.1rem; height: 1.1rem; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); }
-.event-reception .event-map-btn svg { color: #a8e6bc; width: 1rem; height: 1rem; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); }
+.event-engagement .event-map-btn svg,
+.event-wedding .event-map-btn svg,
+.event-reception .event-map-btn svg { color: #a8e6bc; width: 0.95rem; height: 0.95rem; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); }
 
-/* 3D Hover elevation state */
-.event-engagement .event-map-btn:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(180deg, #572B3B 0%, #331722 100%) !important;
-  box-shadow: 0 6px 0 #180A10, 0 12px 26px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.4);
-}
-
-.event-wedding .event-map-btn:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(180deg, #245434 0%, #12331F 100%) !important;
-  box-shadow: 0 6px 0 #07150C, 0 12px 26px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.4);
-}
-
+/* Hover — lift all three */
+.event-engagement .event-map-btn:hover,
+.event-wedding .event-map-btn:hover,
 .event-reception .event-map-btn:hover {
   transform: translateY(-2px);
   background: linear-gradient(180deg, #38794d 0%, #224f32 100%) !important;
   box-shadow: 0 7px 0 #0d2015, 0 14px 30px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.35);
 }
 
-/* 3D Active click press down state */
+/* Active press-down state */
 .event-card .event-map-btn:active {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.8), 0 4px 10px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(0, 0, 0, 0.4) !important;
@@ -1899,7 +1850,9 @@ a {
     border-radius: 10px;
   }
 
-  /* Reception uses real img — no padding, no fixed height */
+  /* All 3 cards use real img — no padding, no fixed height */
+  .event-list article.event-card.event-engagement,
+  .event-list article.event-card.event-wedding,
   .event-list article.event-card.event-reception {
     min-height: unset;
     padding: 0;
