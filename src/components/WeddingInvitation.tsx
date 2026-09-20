@@ -538,7 +538,8 @@ export function WeddingInvitation() {
 
               <div className="parent-section">
                 <span className="parent-label">SON OF</span>
-                <strong className="parent-names">Mr.Soosadimai & Mrs. Veergin</strong>
+                <strong className="parent-names">Mr.Soosadimai & Mrs. Veergin Mary
+                </strong>
               </div>
 
               <p className="with-connector">With</p>
@@ -804,7 +805,7 @@ export function WeddingInvitation() {
               <div className="final-btn-wrap">
                 <button className="end-popup-trigger" onClick={() => setShowEndPopup(true)}>
                   <Sparkles size={12} />
-                  <span>Brother's Wedding Invitation</span>
+                  <span>Brother's Wedding <br/>Invitation</span>
                 </button>
               </div>
             </div>
