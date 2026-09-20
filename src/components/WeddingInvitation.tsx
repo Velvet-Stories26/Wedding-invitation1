@@ -483,7 +483,6 @@ export function WeddingInvitation() {
               }}
             />
           </button>
-          <p className="opening-hint">Click to open</p>
         </section>
       )}
 
@@ -535,20 +534,20 @@ export function WeddingInvitation() {
               <p className="eyebrow">YOU ARE INVITED TO THE<br />WEDDING CEREMONY OF</p>
 
               <FloralMark />
-              <h2 className="script-title card-person-name">Sujin James</h2>
+              <h2 className="script-title card-person-name">Sujin (Samjin)</h2>
 
               <div className="parent-section">
                 <span className="parent-label">SON OF</span>
-                <strong className="parent-names">MR. & MRS. JAMES</strong>
+                <strong className="parent-names">Mr.Soosadimai & Mrs. Veergin</strong>
               </div>
 
               <p className="with-connector">With</p>
 
-              <h2 className="script-title card-person-name">Jeneesha James</h2>
+              <h2 className="script-title card-person-name">Jineesha James</h2>
 
               <div className="parent-section">
                 <span className="parent-label">DAUGHTER OF</span>
-                <strong className="parent-names">MR. & MRS. FAMILY NAME</strong>
+                <strong className="parent-names">Mr.James & Mrs.Maryas Mary</strong>
               </div>
 
               <div className="card-custom-message">
@@ -796,17 +795,23 @@ export function WeddingInvitation() {
           <section className="final-section">
             <img src={laughImage} alt="Sujin and Jineesha James laughing together at dusk" width={1280} height={912} loading="lazy" />
             <div className="final-shade" />
-            <div data-reveal><Sparkles /><p className="eyebrow">With you, always</p><h2>And So Our<br /><em>Forever Begins...</em></h2><p>07 · 10 · 2026</p><span>Sujin &amp; Jineesha James</span></div>
+            <div data-reveal>
+              <Sparkles />
+              <p className="eyebrow">With you, always</p>
+              <h2>And So Our<br /><em>Forever Begins...</em></h2>
+              <p>07 · 10 · 2026</p>
+              <span className="final-names">Sujin &amp; Jineesha James</span>
+              <div className="final-btn-wrap">
+                <button className="end-popup-trigger" onClick={() => setShowEndPopup(true)}>
+                  <Sparkles size={12} />
+                  <span>Brother's Wedding Invitation</span>
+                </button>
+              </div>
+            </div>
 
           </section>
 
-          {/* End button to trigger brother's wedding popup */}
-          <div className="end-popup-trigger-wrapper">
-            <button className="end-popup-trigger" onClick={() => setShowEndPopup(true)}>
-              <Sparkles size={14} />
-              <span>Brother's Wedding Invitation</span>
-            </button>
-          </div>
+
 
           {/* ── End-of-page Popup ── */}
 

@@ -2962,10 +2962,11 @@ a {
   margin-top: 2rem
 }
 
-.final-section span {
+.final-section span.final-names,
+.final-section > div > span:not(.end-popup-trigger span) {
   display: block;
   margin-top: 1.5rem;
-  font: italic 2rem var(--font-serif)
+  font: italic 2rem var(--font-serif);
 }
 
 .lightbox {
@@ -3262,37 +3263,73 @@ a {
 /* =====================================================
    END POPUP TRIGGER BUTTON AT PAGE BOTTOM
 ===================================================== */
-.end-popup-trigger-wrapper {
-  text-align: center;
-  padding: 2.2rem 1.5rem 4.5rem;
-  background: #ffffff;
-  position: relative;
+.final-btn-wrap {
+  margin-top: 1.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .end-popup-trigger {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
-  padding: 0.78rem 1.65rem;
-  background: linear-gradient(145deg, #1b3a20 0%, #122816 100%);
-  color: #f2f7ed;
-  border: 1px solid rgba(226, 211, 180, 0.4);
-  border-radius: 100px;
-  font: 600 0.82rem/1 "Cormorant Garamond", serif;
-  letter-spacing: 0.12em;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.42rem 1.05rem;
+  background: linear-gradient(180deg, #2a5231 0%, #1a3920 50%, #112816 100%);
+  color: #f7f9f5;
+  border: 1px solid rgba(226, 211, 180, 0.5);
+  border-bottom: 1px solid rgba(12, 27, 16, 0.95);
+  border-radius: 9999px;
+  font: 600 0.7rem/1.2 var(--font-sans, "Inter", sans-serif);
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 8px 25px rgba(27, 58, 32, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  /* 3D button effect: physical ledge extrusion, top specular highlight & layered shadows */
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.45),
+    inset 0 -2px 1px rgba(0, 0, 0, 0.45),
+    0 3px 0 #0b1c0f,
+    0 4px 2px rgba(0, 0, 0, 0.35),
+    0 6px 14px rgba(0, 0, 0, 0.5);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.2s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.end-popup-trigger span {
+  display: inline !important;
+  margin: 0 !important;
+  font: 600 0.7rem/1 var(--font-sans, "Inter", sans-serif) !important;
+  letter-spacing: 0.09em !important;
+  color: #f7f9f5 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+  font-style: normal !important;
+}
+
+.end-popup-trigger svg {
+  margin: 0 !important;
+  color: #e5d2ac !important;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.8));
 }
 
 .end-popup-trigger:hover {
-  background: linear-gradient(145deg, #284e2e 0%, #1b3a20 100%);
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 12px 32px rgba(27, 58, 32, 0.28);
-  color: #ffffff;
+  background: linear-gradient(180deg, #32623b 0%, #204628 50%, #15321c 100%);
+  transform: translateY(-1px);
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.55),
+    inset 0 -2px 1px rgba(0, 0, 0, 0.45),
+    0 4px 0 #0b1c0f,
+    0 5px 3px rgba(0, 0, 0, 0.35),
+    0 8px 18px rgba(0, 0, 0, 0.55);
 }
 
 .end-popup-trigger:active {
-  transform: translateY(0) scale(0.99);
+  transform: translateY(3px);
+  box-shadow: 
+    inset 0 2px 3px rgba(0, 0, 0, 0.65),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+    0 0 0 #0b1c0f,
+    0 2px 4px rgba(0, 0, 0, 0.4);
 }
