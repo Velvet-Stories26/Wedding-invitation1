@@ -405,6 +405,13 @@ export function WeddingInvitation() {
     }
   };
 
+  const stopMusic = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+    setMusic(false);
+  };
+
   const handleOpen = () => {
     setOpened(true);
     // Pre-initialize audio instance on gesture so browser permissions allow playback when 2nd video starts
@@ -833,7 +840,10 @@ export function WeddingInvitation() {
                   target="_blank"
                   rel="noreferrer"
                   className="end-popup-btn"
-                  onClick={() => setShowEndPopup(false)}
+                  onClick={() => {
+                    stopMusic();
+                    setShowEndPopup(false);
+                  }}
                 >
                   <Heart size={14} /> View Invitation
                 </a>
