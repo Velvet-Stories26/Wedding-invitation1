@@ -36,12 +36,30 @@ import letterClosedImage from "@/assets/letter.png";
 import letterOpenImage from "@/assets/letter-open.png";
 import musicFile from "@/assets/music.mp3";
 
+import slide1 from "@/assets/slide1.png";
+import slide2 from "@/assets/slide2.png";
+import slide3 from "@/assets/slide3.png";
+import slide4 from "@/assets/slide4.jpeg";
+import slide5 from "@/assets/slide5.png";
+import slide6 from "@/assets/slide6.png";
+import slide7 from "@/assets/slide7.jpeg";
+
 const weddingDate = new Date("2026-10-07T11:00:00+05:30");
 const gallery = [
   { src: heroImage, alt: "Sujin and Jeneesha in a palace garden", ratio: "portrait" },
   { src: ringsImage, alt: "Henna, heirloom rings and jasmine", ratio: "landscape" },
   { src: walkImage, alt: "The couple walking through a sunlit colonnade", ratio: "portrait" },
   { src: laughImage, alt: "The couple laughing beneath white flowers", ratio: "landscape" },
+];
+
+const slideshowImages = [
+  { src: slide1, alt: "Beautiful memory 1" },
+  { src: slide2, alt: "Beautiful memory 2" },
+  { src: slide3, alt: "Beautiful memory 3" },
+  { src: slide4, alt: "Beautiful memory 4" },
+  { src: slide5, alt: "Beautiful memory 5" },
+  { src: slide6, alt: "Beautiful memory 6" },
+  { src: slide7, alt: "Beautiful memory 7" },
 ];
 
 function useCountdown() {
@@ -408,9 +426,39 @@ export function WeddingInvitation() {
   }, [revealedDates]);
 
   useEffect(() => {
-    const timer = window.setInterval(() => setSlide((value) => (value + 1) % gallery.length), 4800);
+    const timer = window.setInterval(() => {
+      setSlide((value) => (value + 1) % slideshowImages.length);
+    }, 4800);
     return () => window.clearInterval(timer);
-  }, []);
+  }, [slide]);
+
+  const slideTouchStart = useRef<{ x: number; y: number } | null>(null);
+
+  const handleSlideTouchStart = (e: React.TouchEvent) => {
+    slideTouchStart.current = {
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY,
+    };
+  };
+
+  const handleSlideTouchEnd = (e: React.TouchEvent) => {
+    if (!slideTouchStart.current) return;
+    const endX = e.changedTouches[0].clientX;
+    const endY = e.changedTouches[0].clientY;
+    const diffX = slideTouchStart.current.x - endX;
+    const diffY = slideTouchStart.current.y - endY;
+
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+      if (diffX > 0) {
+        // Swiped left -> next slide
+        setSlide((curr) => (curr + 1) % slideshowImages.length);
+      } else {
+        // Swiped right -> previous slide
+        setSlide((curr) => (curr - 1 + slideshowImages.length) % slideshowImages.length);
+      }
+    }
+    slideTouchStart.current = null;
+  };
 
   const toggleMusic = () => {
     if (!audioRef.current) {
@@ -591,7 +639,7 @@ export function WeddingInvitation() {
               </div>
 
               <strong className="card-event-date">WEDNESDAY · 07 OCTOBER · 2026</strong>
-              <span className="card-event-venue">at Château in Occitanie, France</span>
+              <span className="card-event-venue">St.John of the Cross Church</span>
             </div>
           </section>
 
@@ -613,11 +661,42 @@ export function WeddingInvitation() {
             </div>
             <TornEdgeBottom color="#22442c" />
           </section>
-          <section id="memories" className="slideshow-section">
-            {gallery.map((image, index) => <img key={image.src} className={slide === index ? "active" : ""} src={image.src} alt={image.alt} width={1280} height={index === 0 ? 1536 : 912} loading="lazy" />)}
+          <section
+            id="memories"
+            className="slideshow-section"
+            onTouchStart={handleSlideTouchStart}
+            onTouchEnd={handleSlideTouchEnd}
+          >
+            {slideshowImages.map((image, index) => (
+              <img
+                key={image.src}
+                className={slide === index ? "active" : ""}
+                src={image.src}
+                alt={image.alt}
+                width={1280}
+                height={1536}
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+            ))}
             <div className="slideshow-shade" />
-            <div className="slideshow-copy" data-reveal><p className="eyebrow">Beautiful memories</p><h2>Every frame, a chapter</h2><p>Of laughter held close and moments we will carry into forever.</p></div>
-            <div className="slide-dots">{gallery.map((_, index) => <button key={index} className={slide === index ? "active" : ""} onClick={() => setSlide(index)} aria-label={`Show slide ${index + 1}`} />)}</div>
+            <div className="slideshow-copy" data-reveal>
+              <h2>In the Days We’ll Share</h2>
+              <p>We look forward to capturing stolen glances, intertwined hands, quiet evenings, and all the love in between.</p>
+            </div>
+            <div
+              className="slide-dots"
+              onPointerDown={(e) => e.stopPropagation()}
+            >
+              {slideshowImages.map((_, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  className={slide === index ? "active" : ""}
+                  onClick={() => setSlide(index)}
+                  aria-label={`Show slide ${index + 1}`}
+                />
+              ))}
+            </div>
           </section>
 
           {/* <section id="story" className="story-section paper-section">
@@ -640,7 +719,11 @@ export function WeddingInvitation() {
           <section className="gallery-section paper-section torn-section">
             <TornEdgeTop color="#22442c" />
             <TornEdgeBottom color="#22442c" />
-            <div data-reveal><p className="eyebrow">Through our eyes</p><h2>A few favorite moments</h2></div>
+            <div data-reveal>
+              <p className="eyebrow">Through our eyes</p>
+              <h2>A Love We Imagine</h2>
+              <p className="gallery-subtitle">The gestures, details, and fleeting moments that inspire the beginning of our forever.</p>
+            </div>
             <div className="gallery-grid">
               {gallery.map((image, index) => <button key={image.src} className={image.ratio} onClick={() => setLightbox(index)} aria-label={`View ${image.alt} fullscreen`}><img src={image.src} alt={image.alt} width={1024} height={1280} loading="lazy" /><span>0{index + 1}</span></button>)}
             </div>

@@ -1340,7 +1340,10 @@ a {
   position: relative;
   height: 82svh;
   min-height: 580px;
-  background: var(--primary)
+  background: var(--primary);
+  overflow: hidden;
+  user-select: none;
+  touch-action: pan-y;
 }
 
 .slideshow-section>img {
@@ -1351,12 +1354,22 @@ a {
   object-fit: cover;
   opacity: 0;
   transform: scale(1.05);
-  transition: opacity 1.4s, transform 5.5s
+  transition: opacity 1.4s ease-in-out, transform 5.5s ease-out;
+  pointer-events: none;
 }
 
 .slideshow-section>img.active {
   opacity: 1;
-  transform: scale(1)
+  transform: scale(1);
+  z-index: 1;
+}
+
+.slideshow-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 20, 12, 0.05) 0%, rgba(8, 20, 12, 0.2) 60%, rgba(8, 20, 12, 0.6) 100%);
+  pointer-events: none;
+  z-index: 2;
 }
 
 .slideshow-copy {
@@ -1365,20 +1378,22 @@ a {
   right: 1.5rem;
   bottom: 12%;
   color: var(--primary-foreground);
-  max-width: 36rem
+  max-width: 36rem;
+  pointer-events: none;
+  z-index: 3;
 }
 
 .slideshow-copy .eyebrow {
-  color: var(--champagne)
+  color: var(--champagne);
 }
 
 .slideshow-copy h2 {
   font: 400 clamp(2.8rem, 12vw, 5rem)/1 var(--font-display);
-  margin: 0
+  margin: 0;
 }
 
 .slideshow-copy>p:last-child {
-  font: italic 1.1rem/1.6 var(--font-serif)
+  font: italic 1.1rem/1.6 var(--font-serif);
 }
 
 .slide-dots {
@@ -1386,19 +1401,42 @@ a {
   right: 1.5rem;
   bottom: 5%;
   display: flex;
-  gap: .5rem
+  align-items: center;
+  gap: clamp(0.35rem, 1vw, 0.55rem);
+  z-index: 20;
 }
 
 .slide-dots button {
-  width: 1.8rem;
-  height: 2px;
+  width: clamp(1.4rem, 3.5vw, 1.9rem);
+  height: 2.5px;
   border: 0;
   padding: 0;
-  background: color-mix(in oklab, var(--primary-foreground) 35%, transparent)
+  background: color-mix(in oklab, var(--primary-foreground) 40%, transparent);
+  cursor: pointer;
+  position: relative;
+  border-radius: 2px;
+  transition: background 0.3s ease, width 0.35s ease, transform 0.2s ease;
+}
+
+/* Touch hit target expansion for effortless mobile tapping and desktop clicking */
+.slide-dots button::before {
+  content: "";
+  position: absolute;
+  top: -14px;
+  bottom: -14px;
+  left: -4px;
+  right: -4px;
+}
+
+.slide-dots button:hover {
+  background: color-mix(in oklab, var(--primary-foreground) 80%, transparent);
+  transform: scaleY(1.5);
 }
 
 .slide-dots button.active {
-  background: var(--champagne)
+  background: var(--champagne);
+  width: clamp(2.2rem, 5.2vw, 2.9rem);
+  transform: scaleY(1.3);
 }
 
 .gallery-section {
@@ -1417,12 +1455,25 @@ a {
   font-weight: 600;
 }
 
+.gallery-subtitle {
+  font-family: "Bodoni Moda", "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(0.85rem, 2.2vw, 0.95rem);
+  line-height: 1.55;
+  color: #435e45;
+  letter-spacing: 0.025em;
+  max-width: 32rem;
+  margin: 0.65rem auto 0;
+  padding: 0 1.25rem;
+}
+
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: .6rem;
   max-width: 62rem;
-  margin: 3rem auto 0
+  margin: 2.2rem auto 0
 }
 
 .gallery-grid button {
