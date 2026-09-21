@@ -16,10 +16,11 @@ import {
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/couple-hero.jpg";
-import walkImage from "@/assets/memory-walk.jpg";
-import ringsImage from "@/assets/memory-rings.jpg";
-import laughImage from "@/assets/memory-laugh.jpg";
+import g1 from "@/assets/g1.jpeg";
+import g2 from "@/assets/g2.jpeg";
+import g3 from "@/assets/g3.jpeg";
+import g4 from "@/assets/g4.jpeg";
+import laughImage from "@/assets/memory-laugh.png";
 import startAnimeVideo from "@/assets/start-anime.mp4";
 import weddingAnimation from "@/assets/wedding-animation.mp4";
 import invitationBg from "@/assets/invitaion-bg.png";
@@ -46,10 +47,10 @@ import slide7 from "@/assets/slide7.jpeg";
 
 const weddingDate = new Date("2026-10-07T11:00:00+05:30");
 const gallery = [
-  { src: heroImage, alt: "Sujin and Jeneesha in a palace garden", ratio: "portrait" },
-  { src: ringsImage, alt: "Henna, heirloom rings and jasmine", ratio: "landscape" },
-  { src: walkImage, alt: "The couple walking through a sunlit colonnade", ratio: "portrait" },
-  { src: laughImage, alt: "The couple laughing beneath white flowers", ratio: "landscape" },
+  { src: g1, alt: "A love we imagine 1", ratio: "portrait" },
+  { src: g2, alt: "A love we imagine 2", ratio: "portrait" },
+  { src: g3, alt: "A love we imagine 3", ratio: "portrait" },
+  { src: g4, alt: "A love we imagine 4", ratio: "portrait" },
 ];
 
 const slideshowImages = [
@@ -718,24 +719,25 @@ export function WeddingInvitation() {
 
           <section className="gallery-section paper-section torn-section">
             <TornEdgeTop color="#22442c" />
-            <TornEdgeBottom color="#22442c" />
             <div data-reveal>
               <p className="eyebrow">Through our eyes</p>
               <h2>A Love We Imagine</h2>
               <p className="gallery-subtitle">The gestures, details, and fleeting moments that inspire the beginning of our forever.</p>
             </div>
             <div className="gallery-grid">
-              {gallery.map((image, index) => <button key={image.src} className={image.ratio} onClick={() => setLightbox(index)} aria-label={`View ${image.alt} fullscreen`}><img src={image.src} alt={image.alt} width={1024} height={1280} loading="lazy" /><span>0{index + 1}</span></button>)}
+              {gallery.map((image, index) => (
+                <button
+                  key={image.src}
+                  className={image.ratio}
+                  onClick={() => setLightbox(index)}
+                  aria-label={`View ${image.alt} fullscreen`}
+                >
+                  <img src={image.src} alt={image.alt} width={1024} height={1280} loading="lazy" />
+                  <span>0{index + 1}</span>
+                </button>
+              ))}
             </div>
-          </section>
-
-          <section className="polaroid-section paper-section torn-section">
-            <TornEdgeTop color="#22442c" />
             <TornEdgeBottom color="#22442c" />
-            <div data-reveal><p className="eyebrow">Little pieces of us</p><h2>Polaroid memories</h2></div>
-            <div className="polaroids">
-              {[walkImage, laughImage, ringsImage].map((src, index) => <figure key={src}><img src={src} alt={["A walk to remember", "The laugh we love", "A promise in gold"][index]} width={500} height={600} loading="lazy" /><figcaption>{["the long way home", "always laughing", "the promise"][index]}</figcaption></figure>)}
-            </div>
           </section>
 
           <section id="events" className="events-section paper-section torn-section">

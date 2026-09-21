@@ -8,7 +8,7 @@ export function reportError(error: unknown, context: Record<string, unknown> = {
   if (typeof window === "undefined") return;
   
   // Log to console in development
-  if (process.env["NODE_ENV"] === "development") {
+  if (import.meta.env?.DEV) {
     console.error("Error reported:", error, context);
   }
   
