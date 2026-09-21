@@ -2017,7 +2017,7 @@ a {
 } */
 
 .letter-header {
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
   z-index: 2;
 }
 
@@ -2048,8 +2048,8 @@ a {
   grid-template-areas: "letter-stack";
   align-items: center;
   justify-items: center;
-  margin-top: 0.2rem;
-  perspective: 1200px;
+  /* margin-top: 0.2rem; */
+  /* perspective: 1200px; */
 }
 
 /* BOTH IMAGES SHARE THE SAME STACK POSITION */
