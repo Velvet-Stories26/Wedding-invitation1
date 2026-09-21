@@ -526,7 +526,7 @@ export function WeddingInvitation() {
           <Button className="music-button" size="icon" variant="outline" onClick={toggleMusic} aria-label={music ? "Pause ambient music" : "Play ambient music"}>
             {music ? <Pause /> : <Music2 />}
           </Button>
-          {/* <Button className="menu-button" size="icon" variant="outline" onClick={() => setNavOpen(!navOpen)} aria-label="Open navigation"><Menu /></Button> */}
+
           <nav className={navOpen ? "floating-nav is-open" : "floating-nav"} aria-label="Invitation sections">
             {["Invitation", "Story", "Memories", "Events", "Venue", "Notes"].map((item) => (
               <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setNavOpen(false)}>{item}</a>
@@ -696,22 +696,7 @@ export function WeddingInvitation() {
             </div>
           </section>
 
-          {/* <section id="story" className="story-section paper-section">
-            <div data-reveal><p className="eyebrow">Written in the stars</p><h2>Our Love Story</h2></div>
-            <div className="timeline">
-              {[
-                ["2019", "The first hello", "A rainy afternoon, one borrowed umbrella, and a conversation neither of us wanted to end."],
-                ["2021", "A thousand little moments", "Coffee dates became journeys, familiar songs, and the quiet certainty of home."],
-                ["2025", "The easiest yes", "Under a sky full of lanterns, we promised to choose each other in every lifetime."],
-                ["2027", "Our forever begins", "Surrounded by everyone we love, our next chapter begins with you beside us."],
-              ].map(([year, title, text], index) => <article key={year} data-reveal><span>{year}</span><div><small>Chapter {index + 1}</small><h3>{title}</h3><p>{text}</p></div></article>)}
-            </div>
-            <div className={storyOpen ? "how-we-met is-open" : "how-we-met"} data-reveal>
-              <div><p className="eyebrow">The untold chapter</p><h3>How we really met</h3></div>
-              <Button variant="outline" onClick={() => setStoryOpen(!storyOpen)}>{storyOpen ? "Hide the story" : "Turn the page"}</Button>
-              {storyOpen && <p>Elliot arrived twenty minutes late. Clara had ordered for him anyway—and somehow remembered exactly how he took his coffee. He says it was fate. She says it was excellent intuition.</p>}
-            </div>
-          </section> */}
+
 
           <section className="gallery-section paper-section torn-section">
             <TornEdgeTop color="#22442c" />
@@ -888,23 +873,6 @@ export function WeddingInvitation() {
               </div>
             </div>
           </section>
-
-          {/* <section id="venue" className="venue-section paper-section">
-            <div className="venue-image"><img src={heroImage} alt="Palace gardens at the wedding venue" width={1024} height={1536} loading="lazy" /></div>
-            <div className="venue-copy" data-reveal><p className="eyebrow">Where we gather</p><h2>Château de Bonnevanture</h2><p>Occitanie<br />France</p><p className="venue-note">A storied palace where old-world grace meets a garden glowing in candlelight.</p><Button asChild><a href="https://maps.google.com/?q=Occitanie+France" target="_blank" rel="noreferrer"><MapPin /> Get directions</a></Button></div>
-          </section>
-
-          <section id="notes" className="faq-section">
-            <div data-reveal><p className="eyebrow">A few thoughtful details</p><h2>Before you arrive</h2></div>
-            <div className="faq-list">
-              {[
-                ["What should I wear?", "Festive Indian or formal attire. Our palette is ivory, rose, sage and jewel tones—wear what makes you feel wonderful."],
-                ["May I bring a guest?", "Your invitation will note whether a guest has been included. We’re keeping our celebration intimate."],
-                ["Will transport be provided?", "Shuttles will depart selected hotels 45 minutes before each event. Final timings will be shared closer to the date."],
-                ["Can I take photos?", "We invite you to be fully present during the ceremony. Afterward, capture every happy moment and tag #ClaraAndElliot."],
-              ].map(([question, answer]) => <details key={question}><summary>{question}<ChevronDown /></summary><p>{answer}</p></details>)}
-            </div>
-          </section> */}
 
           <section className="final-section">
             <img src={laughImage} alt="Sujin and Jineesha James laughing together at dusk" width={1280} height={912} loading="lazy" />

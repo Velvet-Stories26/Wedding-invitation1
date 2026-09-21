@@ -980,7 +980,7 @@ a {
   height: 100vh;
   height: 100dvh;
   max-height: 100dvh;
-  min-height: 100dvh;
+  /* min-height: 100dvh; */
   overflow: hidden;
   background-size: cover;
   background-position: center center;
@@ -989,7 +989,7 @@ a {
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  padding: 0;
+  padding: -20px;
 }
 
 .formal-card {
