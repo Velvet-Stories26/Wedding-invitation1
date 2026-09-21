@@ -573,7 +573,7 @@ export function WeddingInvitation() {
               <h1 className="hero-names">
                 <span className="script-title">Sujin</span>
                 <span className="hero-amp">&amp;</span>
-                <span className="script-title">Jeneesha</span>
+                <span className="script-title">Jineesha</span>
               </h1>
               <div className="hero-gold-divider">
                 <span className="divider-line" />
