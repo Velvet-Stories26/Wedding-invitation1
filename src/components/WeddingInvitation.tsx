@@ -34,7 +34,7 @@ import musicFile from "@/assets/music.mp3";
 import slide1 from "@/assets/slide1.png";
 import slide2 from "@/assets/slide2.png";
 import slide3 from "@/assets/slide3.png";
-import slide4 from "@/assets/slide4.jpeg";
+import slide4 from "@/assets/slide4.png";
 import slide5 from "@/assets/slide5.png";
 import slide6 from "@/assets/slide6.png";
 import slide7 from "@/assets/slide7.jpeg";
@@ -856,7 +856,7 @@ export function WeddingInvitation() {
             <div className={`image-letter-wrapper ${letterOpen ? "is-open" : ""}`} data-reveal>
               {/* Closed envelope image */}
               <div className="letter-closed-img">
-                <img src={letterClosedImage} alt="Sealed love letter envelope" width={1200} height={700} />
+                <img src={letterClosedImage} alt="Sealed love letter envelope" width={1400} height={800} />
                 {!letterOpen && (
                   <button
                     className="letter-img-seal"
@@ -869,7 +869,7 @@ export function WeddingInvitation() {
 
               {/* Open envelope image */}
               <div className="letter-open-img" onClick={() => setLetterOpen(false)} title="Click to close letter">
-                <img src={letterOpenImage} alt="Opened love letter with heartfelt message" width={1200} height={1200} />
+                <img src={letterOpenImage} alt="Opened love letter with heartfelt message" width={1500} height={1500} />
               </div>
             </div>
           </section>

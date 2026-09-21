@@ -1997,7 +1997,7 @@ a {
 .letter-section {
   position: relative;
   min-height: auto;
-  padding: 3.5rem 1rem 3.5rem;
+  padding: -10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2011,13 +2011,13 @@ a {
   margin-bottom: 0;
   opacity: 1 !important;
 }
-
+/* 
 .letter-section.is-open {
   padding: 3.5rem 1rem 3.5rem;
-}
+} */
 
 .letter-header {
-  margin-bottom: 0.1rem;
+  margin-bottom: 1rem;
   z-index: 2;
 }
 
@@ -2037,6 +2037,7 @@ a {
   color: #ffffff !important;
   margin: 0;
   opacity: 1 !important;
+  margin-bottom: 25px;
 }
 
 /* WRAPPER — Grid stack overlay for fluid 3D letter transition */
