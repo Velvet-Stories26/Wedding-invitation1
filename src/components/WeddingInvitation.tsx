@@ -1,17 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import confetti from "canvas-confetti";
 import {
-  CalendarDays,
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Heart,
-  MapPin,
-  Menu,
   Music2,
   Navigation,
   Pause,
-  Play,
   Sparkles,
   X,
 } from "lucide-react";
@@ -23,7 +18,6 @@ import g4 from "@/assets/g4.jpeg";
 import laughImage from "@/assets/memory-laugh.png";
 import startAnimeVideo from "@/assets/start-anime.mp4";
 import weddingAnimation from "@/assets/wedding-animation.mp4";
-import invitationBg from "@/assets/invitaion-bg.png";
 import invLetterBg from "@/assets/inv-letter.png";
 import engagementImage from "@/assets/engagement.png";
 import weddingImage from "@/assets/wedding.png";
@@ -47,10 +41,10 @@ import slide7 from "@/assets/slide7.jpeg";
 
 const weddingDate = new Date("2026-10-07T11:00:00+05:30");
 const gallery = [
-  { src: g1, alt: "A love we imagine 1", ratio: "portrait" },
-  { src: g2, alt: "A love we imagine 2", ratio: "portrait" },
-  { src: g3, alt: "A love we imagine 3", ratio: "portrait" },
-  { src: g4, alt: "A love we imagine 4", ratio: "portrait" },
+  { src: slide5, alt: "A love we imagine 1", ratio: "portrait" },
+  { src: slide3, alt: "A love we imagine 2", ratio: "portrait" },
+  { src: slide4, alt: "A love we imagine 3", ratio: "portrait" },
+  { src: slide1, alt: "A love we imagine 4", ratio: "portrait" },
 ];
 
 const slideshowImages = [
@@ -299,7 +293,6 @@ export function WeddingInvitation() {
   const [contentRevealed, setContentRevealed] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
   const [letterOpen, setLetterOpen] = useState(false);
-  const [storyOpen, setStoryOpen] = useState(false);
   const [lightbox, setLightbox] = useState<number | null>(null);
   const [slide, setSlide] = useState(0);
   const [music, setMusic] = useState(false);
@@ -309,7 +302,6 @@ export function WeddingInvitation() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const swipeStart = useRef(0);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const hasShownPopup = useRef(false);
 
   useEffect(() => {
     return () => {
@@ -436,16 +428,20 @@ export function WeddingInvitation() {
   const slideTouchStart = useRef<{ x: number; y: number } | null>(null);
 
   const handleSlideTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    if (!touch) return;
     slideTouchStart.current = {
-      x: e.touches[0].clientX,
-      y: e.touches[0].clientY,
+      x: touch.clientX,
+      y: touch.clientY,
     };
   };
 
   const handleSlideTouchEnd = (e: React.TouchEvent) => {
     if (!slideTouchStart.current) return;
-    const endX = e.changedTouches[0].clientX;
-    const endY = e.changedTouches[0].clientY;
+    const touch = e.changedTouches[0];
+    if (!touch) return;
+    const endX = touch.clientX;
+    const endY = touch.clientY;
     const diffX = slideTouchStart.current.x - endX;
     const diffY = slideTouchStart.current.y - endY;
 
