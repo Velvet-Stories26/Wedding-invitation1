@@ -6,7 +6,7 @@ export default defineConfig({
   define: {
     "process.env": {},
   },
-  base: "/vows-invites-2/",
+  base: "/Wedding-invitation1/",
   resolve: {
     tsconfigPaths: true,
   },
