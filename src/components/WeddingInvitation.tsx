@@ -910,7 +910,7 @@ export function WeddingInvitation() {
                   We warmly invite you to explore and celebrate my brother's upcoming wedding celebration as well.
                 </p>
                 <a
-                  href="https://velvet-stories26.github.io/radiant-vows-invites/"
+                  href="https://velvet-stories26.github.io/Wedding-invitation2/"
                   target="_blank"
                   rel="noreferrer"
                   className="end-popup-btn"
