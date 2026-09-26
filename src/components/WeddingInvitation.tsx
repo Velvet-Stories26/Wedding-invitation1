@@ -805,43 +805,6 @@ export function WeddingInvitation() {
               </article>
 
               {/* Reception Card */}
-              <article
-                className="event-card event-reception"
-                data-reveal
-                onClick={() => window.open("https://maps.app.goo.gl/vwfTitZmioioe1EC8?g_st=aw", "_blank", "noopener,noreferrer")}
-              >
-                <a
-                  className="event-card-link"
-                  href="https://maps.app.goo.gl/vwfTitZmioioe1EC8?g_st=aw"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Open Reception venue on Google Maps"
-                />
-
-                {/* Full image — no crop, no letterbox */}
-                <img
-                  src={receptionImage}
-                  alt="Reception venue"
-                  className="reception-full-img"
-                  loading="lazy"
-                />
-
-                <div className="event-card-btn-wrapper">
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="event-map-btn"
-                  >
-                    <a
-                      href="https://maps.app.goo.gl/vwfTitZmioioe1EC8?g_st=aw"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <Navigation className="mr-2 h-4 w-4" /> View Route
-                    </a>
-                  </Button>
-                </div>
-              </article>
             </div>
           </section>
 
